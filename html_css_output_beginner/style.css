@@ -3,6 +3,15 @@
     padding-left: 4%;
     padding-right: 4%;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+header {
+    display: flex;
+    justify-content: center;
 }
 
 header ul {
@@ -14,13 +23,16 @@ header ul {
 .first {
     background-color: black;
     color: white;
+    margin-left: 90px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .second {
     margin-left: 500px;
 }
 
-header div {
+.background-image {
     background-image: url("images/top_image.png");
     background-size: cover;
     /* 繰り返し表示を防ぐ */
@@ -51,7 +63,7 @@ header li {
     font-size: 15px;
 }
 
-.introduction h1{
+.introduction h2{
     display: inline-block;
     font-size: 50px;
     margin-top: 100px;
@@ -61,13 +73,11 @@ header li {
 }
 
 
-
-.contents {
-display: flex;
-justify-content: center;
-align-items: center;
-}
-
+/* .contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
 
 
 .introduction img {
@@ -82,7 +92,7 @@ align-items: center;
 }
 
 
-.profile-images h1 {
+.profile-images h2 {
     display: inline-block;
     font-size: 50px;
     margin-top: 100px;
@@ -121,31 +131,20 @@ footer {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (max-width:600px) {
 
+    .header {
+        justify-content: center;
+    }
+
+
+    .first {
+        margin-left: 10px;
+    }
 
     .second {
         margin-left: 0;
     }
-
-
-    
-
-
-
 
     header ul {
         display: flex;
@@ -160,7 +159,7 @@ footer {
 
     /* header  img {
     justify-content: center;
-} */
+    } */
 
 
 
@@ -187,11 +186,10 @@ footer {
 
     .introduction {
         text-align: center;
-        
     }
 
 
-    .introduction h1 {
+    .introduction h2 {
         display: inline-block;
         font-size: 30px;
         margin-top: 100px;
@@ -244,7 +242,7 @@ footer {
 
   
 
-    .profile-images h1 {
+    .profile-images h2 {
         display: inline-block;
         font-size: 30px;
         margin-top: 100px;
