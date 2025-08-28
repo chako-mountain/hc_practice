@@ -10,7 +10,7 @@ zero_or_one = [0,1]
 
 # 分割関数を一つにまとめた。
 
-def devide(person_list, how_to_devide):
+def devide_groups(person_list, how_to_devide):
 
 
     def divide_3_3(person_list):
@@ -35,8 +35,8 @@ def devide(person_list, how_to_devide):
 randomnum = random.choice(zero_or_one)
 
 if randomnum == 0:
-    devide(persons, "2:4")
+    devide_groups(persons, "2:4")
 else:
-    devide(persons, "3:3")
+    devide_groups(persons, "3:3")
 
 # devide(persons, "3:3")
