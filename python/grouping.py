@@ -8,27 +8,35 @@ import random
 persons = ["A","B","C","D","E","F"]
 zero_or_one = [0,1]
 
-def divide_3_3 (list1,list2,list3,list4,list5,list6):
-    l = [list1,list2,list3,list4,list5,list6]
-    new_list_1 = random.sample(l,3)
-    new_list_2 = list(set(l) - set(new_list_1))
-    
-    print(f"グループを3:3に分けました {new_list_1},{new_list_2}")
+# 分割関数を一つにまとめた。
+
+def devide(person_list, how_to_devide):
 
 
-def divide_4_2 (list1,list2,list3,list4,list5,list6):
-    l = [list1,list2,list3,list4,list5,list6]
-    new_list_1 = random.sample(l,2)
-    new_list_2 = list(set(l) - set(new_list_1))
-    
-    print(f"グループを2:4に分けました {new_list_1},{new_list_2}")
+    def divide_3_3(person_list):
+        new_list_1 = random.sample(person_list, 3)
+        new_list_2 = list(set(person_list) - set(new_list_1))
+        print(f"グループを3:3に分けました {new_list_1},{new_list_2}")
+
+
+    def divide_4_2(person_list):
+        new_list_1 = random.sample(person_list, 2)
+        new_list_2 = list(set(person_list) - set(new_list_1))
+        print(f"グループを2:4に分けました {new_list_1},{new_list_2}")
+
+
+    # 引数に基づいて分ける
+    if how_to_devide == "3:3":
+        divide_3_3(person_list)
+    elif how_to_devide == "2:4":
+        divide_4_2(person_list)
+
 
 randomnum = random.choice(zero_or_one)
-# print(randomnum)
 
 if randomnum == 0:
-    divide_4_2(*persons)
+    devide(persons, "2:4")
 else:
-    divide_3_3(*persons) 
+    devide(persons, "3:3")
 
-# divide_4_2(*persons)
+# devide(persons, "3:3")
