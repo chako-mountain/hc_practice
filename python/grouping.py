@@ -10,33 +10,15 @@ zero_or_one = [0,1]
 
 # 分割関数を一つにまとめた。
 
-def devide_groups(person_list, how_to_devide):
+def divide_groups(person_list, how_to_devide):
 
-
-    def divide_3_3(person_list):
-        new_list_1 = random.sample(person_list, 3)
-        new_list_2 = list(set(person_list) - set(new_list_1))
-        print(f"グループを3:3に分けました {new_list_1},{new_list_2}")
-
-
-    def divide_4_2(person_list):
-        new_list_1 = random.sample(person_list, 2)
-        new_list_2 = list(set(person_list) - set(new_list_1))
-        print(f"グループを2:4に分けました {new_list_1},{new_list_2}")
-
-
-    # 引数に基づいて分ける
-    if how_to_devide == "3:3":
-        divide_3_3(person_list)
-    elif how_to_devide == "2:4":
-        divide_4_2(person_list)
+    group1 = random.sample(person_list, how_to_devide)
+    group2 = list(set(person_list) - set(group1))
+    print(f"グループを{how_to_devide} : {len(person_list)-how_to_devide}に分けました {group1},{group2}")
 
 
 randomnum = random.choice(zero_or_one)
-
 if randomnum == 0:
-    devide_groups(persons, "2:4")
+    divide_groups(persons, 3)
 else:
-    devide_groups(persons, "3:3")
-
-# devide(persons, "3:3")
+    divide_groups(persons, 2)
