@@ -4,7 +4,6 @@
 # 後者の場合、ランダムに二人を選び、それ以外の人間でグループを作る
 
 import random
-
 persons = ["A","B","C","D","E","F"]
 zero_or_one = [0,1]
 
