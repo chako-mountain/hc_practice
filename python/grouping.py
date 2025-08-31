@@ -4,31 +4,17 @@
 # 後者の場合、ランダムに二人を選び、それ以外の人間でグループを作る
 
 import random
-
 persons = ["A","B","C","D","E","F"]
 zero_or_one = [0,1]
 
-def divide_3_3 (list1,list2,list3,list4,list5,list6):
-    l = [list1,list2,list3,list4,list5,list6]
-    new_list_1 = random.sample(l,3)
-    new_list_2 = list(set(l) - set(new_list_1))
-    
-    print(f"グループを3:3に分けました {new_list_1},{new_list_2}")
-
-
-def divide_4_2 (list1,list2,list3,list4,list5,list6):
-    l = [list1,list2,list3,list4,list5,list6]
-    new_list_1 = random.sample(l,2)
-    new_list_2 = list(set(l) - set(new_list_1))
-    
-    print(f"グループを2:4に分けました {new_list_1},{new_list_2}")
+# 分割関数を一つにまとめた。
+def divide_groups(person_list, how_to_devide):
+    group1 = random.sample(person_list, how_to_devide)
+    group2 = list(set(person_list) - set(group1))
+    print(f"グループを{how_to_devide} : {len(person_list)-how_to_devide}に分けました {group1},{group2}")
 
 randomnum = random.choice(zero_or_one)
-# print(randomnum)
-
 if randomnum == 0:
-    divide_4_2(*persons)
+    divide_groups(persons, 3)
 else:
-    divide_3_3(*persons) 
-
-# divide_4_2(*persons)
+    divide_groups(persons, 2)
