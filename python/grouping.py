@@ -9,13 +9,10 @@ persons = ["A","B","C","D","E","F"]
 zero_or_one = [0,1]
 
 # 分割関数を一つにまとめた。
-
 def divide_groups(person_list, how_to_devide):
-
     group1 = random.sample(person_list, how_to_devide)
     group2 = list(set(person_list) - set(group1))
     print(f"グループを{how_to_devide} : {len(person_list)-how_to_devide}に分けました {group1},{group2}")
-
 
 randomnum = random.choice(zero_or_one)
 if randomnum == 0:
