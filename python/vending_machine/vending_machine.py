@@ -139,16 +139,3 @@ while(1):
     
     elif command in ["q", "Q", "exit", "quit"]:
         break
-
-    
-    
-    
-
-
-
-
-
-
-
-
-
