@@ -2,7 +2,6 @@ from typing import Dict
 
 class Suica:
 
-    
     balance = 0
 
     # インスタンス生成時に500円をチャージ

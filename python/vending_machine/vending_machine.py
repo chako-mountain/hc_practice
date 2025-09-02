@@ -4,16 +4,6 @@ suica = Suica()
 
 vending = VendingMachine()
 
-
-# p = Juice("pepushi",150)
-# pepushis = [p,p,p,p,p]
-
-# m = Juice("monster",230)
-# monsters = [m,m,m,m,m]
-
-# i = Juice("irohasu",120)
-# irohasus = [i,i,i,i,i]
-
 pepushi = Juice("pepushi", 150)
 vending.add_stock(pepushi, 5)
 
@@ -145,7 +135,7 @@ while(1):
 
     elif command == "sales_amount":
         print(f"現在の自動販売機の売上額は{total_sales}円です")
-        
+
     
     elif command in ["q", "Q", "exit", "quit"]:
         break
