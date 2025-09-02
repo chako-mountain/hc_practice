@@ -8,7 +8,7 @@ pepushi = Juice("pepushi", 150)
 vending.add_stock(pepushi, 5)
 
 monster = Juice("monster", 230)
-vending.add_stock(monster, 1)
+vending.add_stock(monster, 5)
 
 irohasu = Juice("irohasu", 120)
 vending.add_stock(irohasu, 5)
