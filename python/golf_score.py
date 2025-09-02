@@ -19,38 +19,33 @@ with open('case1.txt', 'r') as f:
 print("row1:", row1)
 print("row2:", row2)
 
+SCORE_MAPPING = {
+-4 : "コンドル",
+-3 : "アルバトロス",
+-2 : "イーグル",
+-1 : "バーディ",
+0 : "パー",
+1 : "ボギー",
+2 : "2ボギー",
+3 : "3ボギー",
+4 : "4ボギー"
+}
+
 
 def hantei (par_row, score_row):
 
-    SCORE_MAPPING = {
-    -4 : "コンドル",
-    -3 : "アルバトロス",
-    -2 : "イーグル",
-    -1 : "バーディ",
-    0 : "パー",
-    1 : "ボギー",
-    2 : "2ボギー",
-    3 : "3ボギー",
-    4 : "4ボギー"
-    }
-
-    result = None  
+    result = None
+    difference = int(score_row) - int(par_row)
     par = int(par_row)
     score = int(score_row)
-    difference = score - par
 
-    if par <= score:
-        if score == 1:
-            result = "ホールインワン"
-        else:
-            result = SCORE_MAPPING[difference]
-    elif par > score:
-        if difference == -4 and par == 5:
+    if score == 1:
+        if par == 5:
             result = "コンドル"
-        elif score == 1:
-            result = "ホールインワン"
         else:
-            result = SCORE_MAPPING[difference]
+            result = "ホールインワン"
+    else:
+        result = SCORE_MAPPING[difference]
 
     return result
 
