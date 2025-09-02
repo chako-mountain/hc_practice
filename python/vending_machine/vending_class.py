@@ -69,24 +69,3 @@ class VendingMachine:
         else:
             self.stock[juice] = count
 
-# class Buy:
-
-#     def canbuy (self, juicelist, index, price, mymoney):
-#         canbuy = False
-#         self.stock = []
-#         self.stock = juicelist
-#         self.mymoney = mymoney
-#         if len(self.stock) != 0 and price <= self.mymoney:
-#              canbuy = True
-#         return canbuy
-    
-
-#     def buying(self, juicelist, index, price, mymoney):
-#         self.stock = juicelist
-#         self.mymoney = mymoney
-#         self.salesamount = 0
-#         if self.canbuy(juicelist, index, price, mymoney) == True:
-#             self.mymoney -= price
-#             del self.stock[index]
-#             self.salesamount = price
-#         return self.stock, self.mymoney, self.salesamount

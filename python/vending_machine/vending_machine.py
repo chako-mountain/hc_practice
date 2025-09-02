@@ -66,6 +66,7 @@ while(1):
         elif goods == "irohasu":
             print(f"在庫は{vending.get_stock_count(irohasu)}個です")
 
+
     elif command == "zaiko_charge":
         
         goods = input("どの商品の在庫を補填するか選択してください。以下三種類ございます\n"
@@ -83,6 +84,7 @@ while(1):
             vending.add_stock(irohasu, 5)
             print("補填が完了しました")
 
+
     elif command == "zaiko":
         goods = input("在庫を確認したい商品を指定してください。三種類ございます\n"
                       "pepushi\n"
@@ -96,36 +98,6 @@ while(1):
         elif goods == "irohasu":
             print(f"在庫は{vending.get_stock_count(irohasu)}個です")
 
-    # elif command == "zaiko":
-    #     goods = input("在庫を確認したい商品を指定してください。三種類ございます\n"
-    #                   "pepushi\n"
-    #                   "monster\n"
-    #                   "irohasu\n")
-
-    #     if goods == "pepushi":
-    #         print(f"在庫は{len(pepushis)}個です")
-    #     elif goods == "monster":
-    #         print(f"在庫は{len(monsters)}個です")
-    #     elif goods == "irohasu":
-    #         print(f"在庫は{len(irohasus)}個です")
-
-    # elif command == "zaiko_charge":
-
-    #     goods = input("どの商品の在庫を補填するか選択してください。以下三種類ございます"
-    #                   "pepushi\n"
-    #                   "monster\n"
-    #                   "irohasu\n")
-        
-    #     if goods == "pepushi":
-    #         pepushis = [p,p,p,p,p]
-    #         print("補填が完了しました")
-    #     elif goods == "monster":
-    #         monsters = [m,m,m,m,m]
-    #         print("補填が完了しました")
-    #     elif goods == "irohasu":
-    #         irohasus = [i,i,i,i,i]
-    #         print("補填が完了しました")
-
     
     elif command == "buy":
 
@@ -134,20 +106,6 @@ while(1):
                       "monster\n"
                       "irohasu\n")
 
-        # if goods == "pepushi":
-            # buy_pepushi = Buy()
-
-            # if buy_pepushi.canbuy(pepushis,len(pepushis),p.price,suica.now_money):
-            #    stock,mymoney,uriage = buy_pepushi.buying(pepushis,len(pepushis)-1,p.price,suica.now_money)
-
-            # #    zankin = mymoney
-
-            #    suica.now_money = mymoney
-            #    total_sales += uriage
-
-            #    print(f"ペプシの在庫は{len(pepushis)}個、残金は{mymoney}、売上{total_sales}円")
-            # else:
-            #     print("該当商品の在庫または残金が足りないので、購入できません")
         if goods == "pepushi":
             mymoney = vending.buy(pepushi, suica.deposit())
             if mymoney != suica.deposit():
@@ -157,6 +115,8 @@ while(1):
                 print(f"ペプシの在庫は{vending.get_stock_count(pepushi)}個、残金は{mymoney}、売上{total_sales}円")
             elif vending.get_stock_count(pepushi) == 0:
                 print("該当商品の在庫がありません")
+            else:
+                print("残金が足りないので購入できません")
 
         if goods == "monster":
             mymoney = vending.buy(monster, suica.deposit())
@@ -167,6 +127,8 @@ while(1):
                 print(f"モンスターの在庫は{vending.get_stock_count(monster)}個、残金は{mymoney}、売上{total_sales}円")
             elif vending.get_stock_count(monster) == 0:
                 print("該当商品の在庫がありません")
+            else:
+                print("残金が足りないので購入できません")
 
         if goods == "irohasu":
             mymoney = vending.buy(irohasu, suica.deposit())
@@ -177,51 +139,13 @@ while(1):
                 print(f"イロハスの在庫は{vending.get_stock_count(irohasu)}個、残金は{mymoney}、売上{total_sales}円")
             elif vending.get_stock_count(irohasu) == 0:
                 print("該当商品の在庫がありません")
+            else:
+                print("残金が足りないので購入できません")
 
-        # if goods == "pepushi":
-        #     buy_pepushi = VendingMachine()
-        #     if buy_pepushi.can_buy(p,suica.deposit()):
-        #         mymoney = buy_pepushi.buy(p,suica.deposit())
-        #         uriage = p.price
 
-        #         suica.balance = mymoney
-        #         total_sales += uriage
-
-        #         print(f"ペプシの在庫は{len(pepushis)-1}個、残金は{mymoney}、売上{total_sales}円")
-        #     else:
-        #         print("該当商品の在庫または残金が足りないので、購入できません")
-
-        # elif goods == "monster":
-
-        #     buy_monster = Buy()
-
-        #     if buy_monster.canbuy(monsters,len(monsters),m.price,suica.now_money):
-        #         stock,mymoney,uriage = buy_monster.buying(monsters,len(monsters)-1,m.price,suica.now_money)
-
-        #         suica.now_money = mymoney
-        #         total_sales += uriage
-
-        #         print(f"モンスターの在庫は{len(monsters)}個、残金は{mymoney}、売上{total_sales}円")
-        #     else:
-        #         print("該当商品の在庫または残金が足りないので、購入できません")
-
-        
-        # elif goods == "irohasu":
-
-        #     buy_irohasu = Buy()
-
-        #     if buy_irohasu.canbuy(irohasus,len(irohasus),m.price,suica.now_money):
-        #         stock,mymoney,uriage = buy_irohasu.buying(irohasus,len(irohasus)-1,m.price,suica.now_money)
-
-        #         suica.now_money = mymoney
-        #         total_sales += uriage
-
-        #         print(f"イロハスの在庫は{len(irohasus)}個、残金は{mymoney}、売上{total_sales}円")
-        #     else:
-        #         print("該当商品の在庫または残金が足りないので、購入できません")
-        
     elif command == "sales_amount":
         print(f"現在の自動販売機の売上額は{total_sales}円です")
+        
     
     elif command in ["q", "Q", "exit", "quit"]:
         break
