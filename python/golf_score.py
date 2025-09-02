@@ -32,7 +32,7 @@ SCORE_MAPPING = {
 }
 
 
-def hantei (par_row, score_row):
+def judge_score (par_row, score_row):
 
     result = None
     difference = int(score_row) - int(par_row)
@@ -51,5 +51,5 @@ def hantei (par_row, score_row):
 
 
 for i in range(0,len(row1)):
-    kekka = hantei(row1[i], row2[i])
+    kekka = judge_score(row1[i], row2[i])
     print(f"ホール {i+1}: par={row1[i]}, score={row2[i]} → {kekka}")
