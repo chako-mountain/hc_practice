@@ -46,25 +46,20 @@ while(1):
 
 
     elif command == "buy":
-        goods = input("どの商品の在庫を購入するか選択してください。以下三種類ございます\n"
-                      "pepushi\n"
-                      "monster\n"
-                      "irohasu\n")
+        juice_names = vending.get_canbuy_juice_name()
+        print("購入可能な商品は以下の通りです")
+        print(", ".join(juice_names))
+
+        wants = input("どの商品を購入しますか？商品名を入力してください: ")
+
+        if wants not in juice_names:
+            print("指定された商品は存在しません")
+            continue
+
         try:
-            if goods == "pepushi":
-                vending.buy(Juice("pepushi", 150), suica)
-                total_sales += 150
-                print(f"ペプシの在庫は{vending.get_stock_count(Juice('pepushi', 150))}個、残金は{suica.deposit()}円、売上{total_sales}円")
-            elif goods == "monster":
-                vending.buy(Juice("monster", 230), suica)
-                total_sales += 230
-                print(f"モンスターの在庫は{vending.get_stock_count(Juice('monster', 230))}個、残金は{suica.deposit()}円、売上{total_sales}円")
-            elif goods == "irohasu":
-                vending.buy(Juice("irohasu", 120), suica)
-                total_sales += 120
-                print(f"イロハスの在庫は{vending.get_stock_count(Juice('irohasu', 120))}個、残金は{suica.deposit()}円、売上{total_sales}円")
-            else:
-                print("指定された商品は存在しません")
+            juice = vending.buy(wants, suica)
+            total_sales += juice.price
+            print(f"{juice.name}を購入しました。{juice.name}の在庫は{vending.get_stock_count(juice)}個、残金は{suica.deposit()}円です。")
         except ValueError as e:
             print(e)
 
