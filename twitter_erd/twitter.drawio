@@ -1,0 +1,110 @@
+<mxfile host="65bd71144e">
+    <diagram id="PKCc9kOHrDavve_Tsd4X" name="ページ1">
+        <mxGraphModel dx="737" dy="1077" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="14" value="&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=internalStorage;whiteSpace=wrap;html=1;backgroundOutline=1;dx=0;dy=20;" parent="1" vertex="1">
+                    <mxGeometry x="380" y="370" width="280" height="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="users" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="370" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;id* ( char[6], not null)&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;email ( varchar[200] , not null , uniq)&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;user_name(&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;varchar&lt;/span&gt;[200] ,not null , uniq)&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;display_name(&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;varchar&lt;/span&gt;[100] , not null)&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;phone_number (&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;varchar&lt;/span&gt;[50] , not null , uniq)&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;introduction (&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;varchar[100] ,not null )&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;place (&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;varchar[100] , not null)&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;Web (&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;varchar[200] , not null )&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;birthday ( date , not null )&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;profile_image (&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;varchar[200] , not null )&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;avatar_image (&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;varchar[200] , not null )&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;created_at ( datetime , not null)&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;updated_at ( datetime , not null)&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="450" width="420" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="64" value="tweets" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="790" y="310" width="260" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="65" value="id* ( char[6] , not null)&lt;div&gt;user_id ( FK(users) , char[6] , not null)&lt;/div&gt;&lt;div&gt;content (&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;varchar[140] , not null)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;created_at ( datetime , not null)&lt;/div&gt;&lt;div&gt;updated_at ( datetime , not null)&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="64" vertex="1">
+                    <mxGeometry x="9" y="50" width="271" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="66" value="likes" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="330" y="85" width="250" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="67" value="id* ( char[6] , not null ,&amp;nbsp; )&lt;div&gt;user_id ( FK(users) , char[6] , not null )&lt;/div&gt;&lt;div&gt;tweet_id ( FK(tweets) , char[6] , not null)&lt;/div&gt;&lt;div&gt;created_at ( datetime , not null)&lt;/div&gt;&lt;div&gt;updated_at (datetime , not null&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="66" vertex="1">
+                    <mxGeometry x="10" y="50" width="240" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="68" value="retweets" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="790" y="620" width="220" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="69" value="id* ( char[6] , not null)&amp;nbsp;&lt;div&gt;user_id ( FK(users) , char[6] , not null)&lt;/div&gt;&lt;div&gt;tweet_id ( FK(users) ,&amp;nbsp; char[6] , not null)&lt;/div&gt;&lt;div&gt;created_at ( datetime , not null )&lt;/div&gt;&lt;div&gt;updated_at ( datetime , not null)&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="68" vertex="1">
+                    <mxGeometry x="9" y="50" width="211" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="70" value="follows" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="350" width="250" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="71" value="id* ( char[6] , not null )&lt;div&gt;follower_id ( FK(users) , char[6] , not null )&lt;/div&gt;&lt;div&gt;followee_id ( FK (users) ,char[6] , not null)&lt;/div&gt;&lt;div&gt;created_at ( datetime , not null )&lt;/div&gt;&lt;div&gt;updated_at ( datetime , not null)&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="70" vertex="1">
+                    <mxGeometry x="10" y="50" width="240" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="72" value="Direct_massages" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="607.5" width="190" height="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="73" value="id* ( char[6] , not null )&lt;div&gt;sender_id ( char[6] , not null )&amp;nbsp;&lt;/div&gt;&lt;div&gt;recipient_id ( char[6] , not null)&lt;/div&gt;&lt;div&gt;content (&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;varchar[200] , not null)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;created_at ( datetime , not null )&amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;updated_at ( daterime , not null )&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="72" vertex="1">
+                    <mxGeometry x="10" y="60" width="180" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="74" value="Bookmarks" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="380" y="850" width="260" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="75" value="id* ( char[6] , not null )&amp;nbsp;&lt;div&gt;user_id ( FK(users) , char[6] , not null )&lt;/div&gt;&lt;div&gt;tweet_id ( FK(tweets) , char[6] , not null )&lt;/div&gt;&lt;div&gt;created_at ( datetime , not null )&lt;/div&gt;&lt;div&gt;updated_at ( datetime , not null )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="74" vertex="1">
+                    <mxGeometry x="10" y="50" width="250" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="76" value="notifications" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="740" y="30" width="380" height="195" as="geometry"/>
+                </mxCell>
+                <mxCell id="77" value="id* ( char[6] , not null )&lt;div&gt;user_id ( FK(users) , char[6] , not null)&lt;/div&gt;&lt;div&gt;sender_id ( char[6] , not null)&lt;/div&gt;&lt;div&gt;tweet_id ( FK(tweets) , char[6] ,null)&lt;/div&gt;&lt;div&gt;retweets_id ( char[6] , null)&lt;/div&gt;&lt;div&gt;likes_id ( FK(likes) , char[6] , null)&lt;/div&gt;&lt;div&gt;follows_id ( FK(followers) , char[6] , null)&lt;/div&gt;&lt;div&gt;Direct_massage_id ( FK(Direct_massages) , char[6] , null)&lt;/div&gt;&lt;div&gt;Bookmark_id ( FK(bookmark) , char[6] , null)&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;created_at ( datetime , not null)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;updated_at ( datetime , not null)&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="76" vertex="1">
+                    <mxGeometry x="10" y="95" width="370" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="87" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="64" edge="1">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="660" y="470" as="sourcePoint"/>
+                        <mxPoint x="760" y="370" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="88" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;exitX=1.009;exitY=0.135;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="14" edge="1">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="640" y="320" as="sourcePoint"/>
+                        <mxPoint x="740" y="120" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="630" y="340"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="89" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;exitX=0;exitY=0.115;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="14" edge="1">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="369.84000000000003" y="397.56000000000006" as="sourcePoint"/>
+                        <mxPoint x="329" y="180" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="300" y="400"/>
+                            <mxPoint x="300" y="180"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="90" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="14" edge="1">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="170" y="499.94" as="sourcePoint"/>
+                        <mxPoint x="280" y="460" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="92" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;exitX=-0.011;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.808;entryY=0.001;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="380.00000000000006" y="590.3399999999999" as="sourcePoint"/>
+                        <mxPoint x="246.60000000000005" y="607.495" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="93" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;exitX=0.574;exitY=1.007;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="14" target="74" edge="1">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="539.51" y="760" as="sourcePoint"/>
+                        <mxPoint x="639.51" y="660" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;" parent="1" edge="1">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="660" y="590" as="sourcePoint"/>
+                        <mxPoint x="790" y="670" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
