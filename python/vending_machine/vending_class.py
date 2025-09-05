@@ -2,7 +2,6 @@ from typing import Dict
 
 class Suica:
 
-    
     balance = 0
 
     # インスタンス生成時に500円をチャージ
@@ -23,22 +22,31 @@ class Suica:
     # 貯金額をただ返すだけ
     def deposit(self):
         return self.balance
+    
+    def pay(self , amount):
+        if self.balance >= amount:
+            self.balance -= amount
+            return True
+        return False
 
 
-# 一種類一インスタンスにしたかったが、ジュース一本で一インスタンスという要求より設計した
+
 class Juice:
 
     def __init__ (self, name, price):
         self.price = price
         self.name = name
 
-    def __del__(self):
-        pass
+    #  オブジェクト比較のため、eq と hashを追加
 
+    def __eq__(self, other):
+        # if isinstance(other, Juice):
+          return isinstance(other, Juice) and self.name == other.name and self.price == other.price
 
-# canbuy 現在の持ち金で購入できるかを確認
-# buying　購入時の処理を記述
-
+    def __hash__(self):
+        return hash((self.name, self.price))
+    
+   
 class VendingMachine:
 
     stock: Dict[Juice, int]
@@ -48,20 +56,29 @@ class VendingMachine:
         self.stock = {}
         self.sales_total = 0
 
-    def can_buy(self, juice: Juice, mymoney: int) :
-        if juice in self.stock and self.stock[juice] > 0 and juice.price <= mymoney:
-            return True
-        return False
+        self.add_stock(Juice("pepushi", 150), 5)
+        self.add_stock(Juice("monster", 230), 5)
+        self.add_stock(Juice("irohasu", 120), 5)
+
+    def can_buy(self, juice: Juice, suica: Suica):
+        return self.stock.get(juice, 0) > 0 and suica.deposit() >= juice.price
+
+    # 標準出力は使えないことを考え、エラーで対処
+    def buy(self, juice: Juice, suica: Suica):
+        if juice not in self.stock:
+            raise ValueError("指定された商品は存在しません")
+        if self.stock[juice] <= 0:
+            raise ValueError("指定された商品は在庫切れです")
+        if not suica.pay(juice.price):
+            raise ValueError("残高が不足しています")
+        
+        self.stock[juice] -= 1
+        self.sales_total += juice.price
     
-    def buy(self, juice: Juice, mymoney: int):
-        if self.can_buy(juice, mymoney):
-            self.stock[juice] -= 1
-            self.sales_total += juice.price
-            mymoney -= juice.price
-        return mymoney
+
+    def get_stock_count(self, juice: Juice):
+        return self.stock.get(juice, 0)
     
-    def get_stock_count(self, name):
-        return self.stock[name]
     
     def add_stock(self, juice: Juice, count: int):
         if juice in self.stock:
@@ -69,24 +86,40 @@ class VendingMachine:
         else:
             self.stock[juice] = count
 
-# class Buy:
 
-#     def canbuy (self, juicelist, index, price, mymoney):
-#         canbuy = False
-#         self.stock = []
-#         self.stock = juicelist
-#         self.mymoney = mymoney
-#         if len(self.stock) != 0 and price <= self.mymoney:
-#              canbuy = True
-#         return canbuy
+    def get_all_stock(self):
+        result = []
+        for juice, count in self.stock.items():
+            result.append((juice.name, count))
+        return result
+    
+    
+    # 購入できるジュースを名前で指名
+    def get_canbuy_juice_name(self):
+        return [juice.name for juice in self.stock.keys()]
     
 
-#     def buying(self, juicelist, index, price, mymoney):
-#         self.stock = juicelist
-#         self.mymoney = mymoney
-#         self.salesamount = 0
-#         if self.canbuy(juicelist, index, price, mymoney) == True:
-#             self.mymoney -= price
-#             del self.stock[index]
-#             self.salesamount = price
-#         return self.stock, self.mymoney, self.salesamount
+    # 有効な名前のジュースかを判定
+    def get_juice_by_name(self, name: str):
+        for juice in self.stock.keys():
+            if juice.name == name:
+                return juice
+        raise ValueError("指定された商品は存在しません")
+    
+    
+    # 購入処理
+    def buy(self, juice_name: str, suica: Suica):
+
+        try:
+            juice = self.get_juice_by_name(juice_name)
+        except ValueError:
+            raise ValueError("指定された商品は存在しません")
+        
+        if self.stock[juice] <= 0:
+            raise ValueError("指定された商品は在庫切れです")
+        if not suica.pay(juice.price):
+            raise ValueError("残高が不足しています")
+        
+        self.stock[juice] -= 1
+        self.sales_total += juice.price
+        return juice
