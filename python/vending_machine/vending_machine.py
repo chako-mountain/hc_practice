@@ -9,7 +9,6 @@ total_sales = 0
 zankin = suica.deposit()
 
 while(1):
-
     # deposit 残金確認
     # charge 金額チャージ
     command = input("実行したい処理を書いてください : \n"
