@@ -4,21 +4,11 @@ suica = Suica()
 
 vending = VendingMachine()
 
-pepushi = Juice("pepushi", 150)
-vending.add_stock(pepushi, 5)
-
-monster = Juice("monster", 230)
-vending.add_stock(monster, 1)
-
-irohasu = Juice("irohasu", 120)
-vending.add_stock(irohasu, 5)
-
 total_sales = 0
 
 zankin = suica.deposit()
 
 while(1):
-
     # deposit 残金確認
     # charge 金額チャージ
     command = input("実行したい処理を書いてください : \n"
@@ -42,95 +32,35 @@ while(1):
         except ValueError as e:
             print(e)
 
-    
-    elif command == "zaiko":
-        goods = input("在庫を確認したい商品を指定してください。三種類ございます\n"
-                      "pepushi\n"
-                      "monster\n"
-                      "irohasu\n")
 
-        if goods == "pepushi":
-            print(f"在庫は{vending.get_stock_count(pepushi)}個です")
-        elif goods == "monster":
-            print(f"在庫は{vending.get_stock_count(monster)}個です")
-        elif goods == "irohasu":
-            print(f"在庫は{vending.get_stock_count(irohasu)}個です")
+    elif command == "zaiko":
+        for name, count in vending.get_all_stock():
+            print(f"{name}の在庫は{count}個です")
 
 
     elif command == "zaiko_charge":
-        
-        goods = input("どの商品の在庫を補填するか選択してください。以下三種類ございます\n"
-                      "pepushi\n"
-                      "monster\n"
-                      "irohasu\n")
-        
-        if goods == "pepushi":
-            vending.add_stock(pepushi, 5)
-            print("補填が完了しました")
-        elif goods == "monster":
-            vending.add_stock(monster, 5)
-            print("補填が完了しました")
-        elif goods == "irohasu":
-            vending.add_stock(irohasu, 5)
-            print("補填が完了しました")
+        vending.add_stock(Juice("pepushi", 150), 5)
+        vending.add_stock(Juice("monster", 230), 5)
+        vending.add_stock(Juice("irohasu", 120), 5)
 
 
-    elif command == "zaiko":
-        goods = input("在庫を確認したい商品を指定してください。三種類ございます\n"
-                      "pepushi\n"
-                      "monster\n"
-                      "irohasu\n")
-
-        if goods == "pepushi":
-            print(f"在庫は{vending.get_stock_count(pepushi)}個です")
-        elif goods == "monster":
-            print(f"在庫は{vending.get_stock_count(monster)}個です")
-        elif goods == "irohasu":
-            print(f"在庫は{vending.get_stock_count(irohasu)}個です")
-
-    
     elif command == "buy":
+        juice_names = vending.get_canbuy_juice_name()
+        print("購入可能な商品は以下の通りです")
+        print(", ".join(juice_names))
 
-        goods = input("どの商品の在庫を購入するか選択してください。以下三種類ございます\n"
-                      "pepushi\n"
-                      "monster\n"
-                      "irohasu\n")
+        wants = input("どの商品を購入しますか？商品名を入力してください: ")
 
-        if goods == "pepushi":
-            mymoney = vending.buy(pepushi, suica.deposit())
-            if mymoney != suica.deposit():
-                uriage = 150
-                suica.balance = mymoney
-                total_sales += uriage
-                print(f"ペプシの在庫は{vending.get_stock_count(pepushi)}個、残金は{mymoney}、売上{total_sales}円")
-            elif vending.get_stock_count(pepushi) == 0:
-                print("該当商品の在庫がありません")
-            else:
-                print("残金が足りないので購入できません")
+        if wants not in juice_names:
+            print("指定された商品は存在しません")
+            continue
 
-        if goods == "monster":
-            mymoney = vending.buy(monster, suica.deposit())
-            if mymoney != suica.deposit():
-                uriage = 230
-                suica.balance = mymoney
-                total_sales += uriage
-                print(f"モンスターの在庫は{vending.get_stock_count(monster)}個、残金は{mymoney}、売上{total_sales}円")
-            elif vending.get_stock_count(monster) == 0:
-                print("該当商品の在庫がありません")
-            else:
-                print("残金が足りないので購入できません")
-
-        if goods == "irohasu":
-            mymoney = vending.buy(irohasu, suica.deposit())
-            if mymoney != suica.deposit() :
-                uriage = 200
-                suica.balance = mymoney
-                total_sales += uriage
-                print(f"イロハスの在庫は{vending.get_stock_count(irohasu)}個、残金は{mymoney}、売上{total_sales}円")
-            elif vending.get_stock_count(irohasu) == 0:
-                print("該当商品の在庫がありません")
-            else:
-                print("残金が足りないので購入できません")
+        try:
+            juice = vending.buy(wants, suica)
+            total_sales += juice.price
+            print(f"{juice.name}を購入しました。{juice.name}の在庫は{vending.get_stock_count(juice)}個、残金は{suica.deposit()}円です。")
+        except ValueError as e:
+            print(e)
 
 
     elif command == "sales_amount":
