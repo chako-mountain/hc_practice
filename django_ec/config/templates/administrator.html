@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>お問い合わせフォーム</title>
+</head>
+
+<body>
+    <h1>お問い合わせフォーム</h1>
+
+    <form action="/submit/" method="post">{% csrf_token %}
+        <label for="name">name：</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Price：</label><br>
+        <input type="text"  required><br><br>
+
+        <label for="message">star rating：</label><br>
+        <textarea id="message" name="message" rows="5" cols="40" required></textarea><br><br>
+
+        <label for="message">Description：</label><br>
+        <textarea id="message" name="message" rows="5" cols="40" required></textarea><br><br>
+
+        <label for="message">is sale：</label><br>
+        <textarea id="message" name="message" rows="5" cols="40" required></textarea><br><br>
+
+        <label for="message">img：</label><br>
+        <textarea id="message" name="message" rows="5" cols="40" required></textarea><br><br>
+
+        <input type="submit" value="送信">
+    </form>
+</body>
+
+</html>
+
+
+
+{% for post in object_list %}
+    <h2>{{ post.name }}</h2>
+    <p>{{ post.description }}</p>
+    <p>Price: ${{ post.price }}</p>
+    <hr>
+{% empty %}
+    <p>No products available.</p>
+{% endfor %}
