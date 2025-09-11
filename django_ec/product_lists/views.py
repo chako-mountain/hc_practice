@@ -11,12 +11,15 @@ def detailsfunction(request, id):
     targetid = id
     model = ProductList
     object_list = model.objects.all()
-    first = object_list.order_by("-created_at").first()
-    second = object_list.order_by("-created_at")[1]
-    third = object_list.order_by("-created_at")[2]
-    fourth = object_list.order_by("-created_at")[3]
+    related_products = {
+        "first" : object_list.order_by("-created_at").first(),
+        "second" : object_list.order_by("-created_at")[1],
+        "third" : object_list.order_by("-created_at")[2],
+        "fourth" : object_list.order_by("-created_at")[3]
+    }
+
     info = model.objects.get(id = targetid)
-    return render(request, 'details.html', {"first": first, "second":second, "third":third, "fourth":fourth, "info": info})
+    return render(request, 'details.html', {"related_products": related_products, "info": info})
 
 def adminfunction(request):
     model = ProductList
