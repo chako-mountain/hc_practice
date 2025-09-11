@@ -29,13 +29,12 @@
     </nav>
 
     <main>
+        <!-- <div>{{ first.name }}です</div> -->
         <img src="{% static 'images/image.png' %}" alt="商品画像">
         <div class="product_info">
-            <h2>商品名</h2>
-            <P>価格: ¥1000</P>
-            <p>商品説明文が入りま。商品説明文が入ります。商品説明文が入ります。商品説明文が入ります。商品説明文が入ります。商品説明文が入ります。商品説明文が入ります。商品説明文が入ります
-                商品説明文が入りま。商品説明文が入ります。商品説明文が入ります。商品説明文が入ります。商品説明文が入ります。商品説明文が入ります。商品説明文が入ります。商品説明文が入ります
-            </p>
+            <h2>{{ info.name }}</h2>
+            <P>{{ info.price }}</P>
+            <p>{{ info.description }}</p>
         </div>
     </main>
 
@@ -44,23 +43,23 @@
         <div class="Related_product_items">
             <div class="Related_product_item">
                 <img src="{% static 'images/image.png' %}" alt="商品画像">
-                <p>商品名</p>
-                <p>価格: ¥1000</p>
+                <p>{{ first.name }}</p>
+                <p>{{ first.price }}</p>
             </div>
             <div class="Related_product_item">
                 <img src="{% static 'images/image.png' %} " alt="商品画像">
-                <p>商品名</p>
-                <p>価格: ¥1000</p>
+                <p>{{ second.name }}</p>
+                <p>{{ second.price }}</p>
             </div>
             <div class="Related_product_item">
                 <img src="{% static 'images/image.png' %}" alt="商品画像">
-                <p>商品名</p>
-                <p>価格: ¥1000</p>
+                <p>{{ third.name }}</p>
+                <p>{{ third.price }}</p>
             </div>
             <div class="Related_product_item">
                 <img src="{% static 'images/image.png' %}" alt="商品画像">
-                <p>商品名</p>
-                <p>価格: ¥1000</p>
+                <p>{{ fourth.name }}</p>
+                <p>{{ fourth.price }}</p>
             </div>
         </div>
     </div>
