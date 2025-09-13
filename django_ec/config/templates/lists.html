@@ -1,8 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-    <head>
+{% load static %}
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+
+    <!-- <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{% static 'lists.css' %}" rel="stylesheet">
@@ -12,11 +14,13 @@
             integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
         <title>Document</title>
-    </head>
+    </head> -->
 
-
-    <body>
-
+{% block link %}
+<link href="{% static 'lists.css' %}" rel="stylesheet">
+{% endblock %}
+    <!-- <body> -->
+<!-- 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -26,9 +30,9 @@
                     <a href="#">Cart</a>
                 </li>
             </ol>
-        </nav>
+        </nav> -->
 
-
+{% block content %}
         <header>
             <div class="jumbotron text-center">
                 <h1 class="display-4">Shop in style</h1>
@@ -36,7 +40,6 @@
 
             </div>
         </header>
-
 
         <main class="main_contents ">
         {% for items in object_list %}
@@ -97,9 +100,10 @@
         <footer>
             <div>ECサイト見本</div>
             </fotter>
-    </body>
+{% endblock %}
+    <!-- </body> -->
 
-</html>
+<!-- </html> -->
 
 
 
