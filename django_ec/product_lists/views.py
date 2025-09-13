@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from product_lists.models import ProductList
 from django.http import HttpResponseRedirect 
+from django.shortcuts import redirect
 
 
 # Create your views here.
@@ -10,18 +11,23 @@ def listsfunction(request):
     return render(request, 'lists.html', {'object_list': object_list})
 
 def detailsfunction(request, id):
-    targetid = id
+    # targetid = id
     model = ProductList
     object_list = model.objects.all()
-    related_products = {
-        "first" : object_list.order_by("-created_at").first(),
-        "second" : object_list.order_by("-created_at")[1],
-        "third" : object_list.order_by("-created_at")[2],
-        "fourth" : object_list.order_by("-created_at")[3]
-    }
+    related_products = object_list.order_by("-created_at")[:4]
+    print("リスト表示したい")
+    print(related_products)
+    # related_products = {
+    #     "first" : object_list.order_by("-created_at").first(),
+    #     "second" : object_list.order_by("-created_at")[1],
+    #     "third" : object_list.order_by("-created_at")[2],
+    #     "fourth" : object_list.order_by("-created_at")[3]
+    # }
 
-    info = model.objects.get(id = targetid)
-    return render(request, 'details.html', {"related_products": related_products, "info": info})
+    product = model.objects.get(id = id)
+    return render(request, 'details.html', {"related_products": related_products, "product": product})
+    
+    # return render(request, 'details.html', {"related_products": related_products, "info": info})
 
 def adminfunction(request):
     model = ProductList
@@ -71,7 +77,8 @@ def contents_add_function(request):
         print("Method:", request.method)  # POST かどうか
         print("POST data:", request.POST)  # 送信データの中身
 
-    return render(request, "contents.html")
+    # return render(request, "contents.html")
+    return redirect("../")
 
 
 def delete_function(request):
@@ -81,7 +88,8 @@ def delete_function(request):
     delete_id = request.POST["post_id"]
     model.objects.filter(id = delete_id).delete()
     print("deleted")
-    return render(request, "test.html")
+    # return render(request, "test.html")
+    return redirect("../")
 
 
 def edit_function(request):
@@ -118,8 +126,8 @@ def update_function(request):
     update_list.save()
 
 
-
-    return render(request, "administrator.html" )
+    return redirect("../../")
+    # return render(request, "administrator.html" )
 
   
 
