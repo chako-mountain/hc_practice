@@ -2,34 +2,28 @@ from django.shortcuts import render
 from product_lists.models import ProductList
 from django.http import HttpResponseRedirect 
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-def listsfunction(request):
+def product_list_view(request):
     model = ProductList
     object_list = model.objects.all()
     return render(request, 'lists.html', {'object_list': object_list})
 
-def detailsfunction(request, id):
+
+def product_detail_view(request, id):
     # targetid = id
     model = ProductList
     object_list = model.objects.all()
     related_products = object_list.order_by("-created_at")[:4]
     print("リスト表示したい")
     print(related_products)
-    # related_products = {
-    #     "first" : object_list.order_by("-created_at").first(),
-    #     "second" : object_list.order_by("-created_at")[1],
-    #     "third" : object_list.order_by("-created_at")[2],
-    #     "fourth" : object_list.order_by("-created_at")[3]
-    # }
-
     product = model.objects.get(id = id)
     return render(request, 'details.html', {"related_products": related_products, "product": product})
     
-    # return render(request, 'details.html', {"related_products": related_products, "info": info})
-
-def adminfunction(request):
+    
+def product_admin_view(request):
     model = ProductList
     object_list = model.objects.all()
     return render(request, 'administrator.html', {'object_list': object_list})
@@ -37,25 +31,14 @@ def adminfunction(request):
 def showdetailfunction(request, id):
     targetid = id
     model = ProductList
-    info = model.objects.get(id = targetid)
+    info = model.objects.get(id=targetid)
     return render(request, 'details.html', {'info':info})
 
-# def contents_add_function(request):
-#     print("called")
-    
-#     if request.method == "POST":
-    
-#         name = request.POST["name"]
 
-#     return render(request, "contents.html")
-
-
-# 以下は無視してください
+# 以下は無視してください。実装の途中です。
 def contents_add_function(request):
 
-
     if request.method == "POST":
-
         product_list = ProductList()
         product_list.name = request.POST["name"]
         product_list.price = request.POST["price"]
@@ -64,14 +47,10 @@ def contents_add_function(request):
         product_list.is_sale = request.POST.get("is_sale") == "on"
         product_list.img = request.POST["img"]
 
-
-
         print("this is name")
         print(product_list.name)
 
         product_list.save()
-
-
 
         print("called")  # 呼び出されたか確認
         print("Method:", request.method)  # POST かどうか
@@ -84,7 +63,6 @@ def contents_add_function(request):
 def delete_function(request):
     print("called")
     model = ProductList
-    
     delete_id = request.POST["post_id"]
     model.objects.filter(id = delete_id).delete()
     print("deleted")
@@ -95,11 +73,9 @@ def delete_function(request):
 def edit_function(request):
     print("edit is called")
     model = ProductList
-
     edit_id = request.POST["edit_id"]
     print(edit_id)
     edit_list = model.objects.get(id = edit_id)
-
     img = edit_list.img
     print("edit_list")
     print(edit_list)
@@ -112,8 +88,6 @@ def update_function(request):
     product_id = request.POST.get("product_id")
     update_list = ProductList.objects.get(id=product_id)
 
-     
-
     update_list.name = request.POST["name"]
     update_list.price = request.POST["price"]
     update_list.star_rating = request.POST["rating"]
@@ -125,9 +99,7 @@ def update_function(request):
     print(update_list.img)
     update_list.save()
 
-
     return redirect("../../")
     # return render(request, "administrator.html" )
 
   
-
