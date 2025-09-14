@@ -136,3 +136,13 @@ STATICFILES_DIRS = (
         os.path.join(BASE_DIR, "static"), 
     ]
 )
+
+# MIDDLEWARE = (
+#     'basicauth.middleware.BasicAuthMiddleware',
+    
+# )
+
+
+BASICAUTH_USERS = {
+    "yama": "oton",
+}
