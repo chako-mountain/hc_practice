@@ -1,8 +1,13 @@
-from django.shortcuts import render
+from django.db import IntegrityError
+from django.shortcuts import render, redirect
 from product_lists.models import ProductList
 from django.http import HttpResponseRedirect 
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from basicauth.decorators import basic_auth_required
+# from django.utils.decorators import method_decorator
 
 
 # Create your views here.
@@ -28,6 +33,7 @@ def product_admin_view(request):
     object_list = model.objects.all()
     return render(request, 'administrator.html', {'object_list': object_list})
 
+
 def showdetailfunction(request, id):
     targetid = id
     model = ProductList
@@ -36,6 +42,7 @@ def showdetailfunction(request, id):
 
 
 # 以下は無視してください。実装の途中です。
+@basic_auth_required
 def contents_add_function(request):
 
     if request.method == "POST":
@@ -103,3 +110,52 @@ def update_function(request):
     # return render(request, "administrator.html" )
 
   
+def signup_function(request):
+
+    if request.method == "POST":
+        user_name = request.POST["user_name"]
+        passward = request.POST["passward"]
+        try:
+            user = User.objects.create_user(user_name , '' , passward)
+        except IntegrityError:
+            return render(request, "signup.html", {"error":"このユーザーは登録済みです"})
+
+
+    return render(request, "signup.html" )
+
+
+# def loginfunction(request):
+#     if request.method == "POST":
+#         username = request.POST["user_name"]
+#         password = request.POST["passward"]
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return(render(request, "login.html", {"content":"logged in"}))
+#         else:
+#             return render(request, "login.html", {"content": "not logged in"})
+        
+#     return render(request, "login.html", {"content": "not logged in"})
+
+
+# @basic_auth_required
+# def loginfunction(request):
+
+#     users = getattr(settings, 'BASICAUTH_USERS', {})
+#     if request.method == "POST":
+#         username = request.POST["user_name"]
+#         password = request.POST["passward"]
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return(render(request, "login.html", {"content":"logged in"}))
+#         else:
+#             return render(request, "login.html", {"content": "not logged in"})
+        
+#     return render(request, "login.html", {"content": "not logged in"})
+
+
+@basic_auth_required
+def admin_page(request):
+    # return render(request, "administrator.html")
+    return redirect("administrator")
