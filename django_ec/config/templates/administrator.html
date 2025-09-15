@@ -33,7 +33,6 @@
         <!-- <textarea id="is_sale" name="is_sale" rows="5" cols="40" required></textarea><br><br> -->
         <input type="checkbox" name="is_sale" id="is_sale" {% if edit_list.is_sale %}checked{% endif %}>
 
-
         <label for="img">Image URL：</label><br>
         <textarea id="img" name="img" rows="5" cols="40" required></textarea><br><br>
 
@@ -52,12 +51,12 @@
 {% for post in object_list %}
 
 
-    <form action = "submit2/" method = "POST"  >{% csrf_token %}
+    <form action = "submit_delete/" method = "POST"  >{% csrf_token %}
         <input type="hidden" name="post_id" value="{{ post.id }}">
         <input type="submit" value="削除">
     </form>
 
-    <form action="submit3/" method="POST">{% csrf_token %}
+    <form action="submit_edit/" method="POST">{% csrf_token %}
         <input type="hidden" name="edit_id" value="{{ post.id }}">
         <input type="submit" value="編集">
     </form>
@@ -65,7 +64,7 @@
 
     <h2>{{ post.name }}</h2>
     <p>{{ post.description }}</p>
-    <p>Price: ${{ post.price }}</p>
+    <p>値段: {{ post.price|floatformat:0 }}円</p>
     <hr>
 {% empty %}
     <p>No products available.</p>

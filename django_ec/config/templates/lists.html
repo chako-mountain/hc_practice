@@ -61,14 +61,23 @@
                 </div>
 
                 <div class = "price">{{ items.price|floatformat:0 }}円</div>
-        
                 <br>
-                <div class="text-center">
+
+                <!-- 元祖ボタン -->
+                <!-- <div class="text-center">
                     <a href="#" class="btn btn-outline-dark justify-content-center">Add to cart</a>
-                </div>
+                </div> -->
+
+                <!-- 新しく作ったボタン -->
+                <form action="submit_to_cart" method = "POST" id = "{{ items.id }}">{% csrf_token %}
+                    <!-- <input type = "submit" class="btn btn-outline-dark justify-content-center" value = "Add to cart"> -->
+                    <!-- <a href="#" class="btn btn-outline-dark justify-content-center">Add to cart</a> -->
+                    <input type="hidden" name="edit_id" value="{{ items.id }}">
+                    <input type="submit" class="btn btn-outline-dark justify-content-center" value="Add to cart">
+                </form>
+                
             </div>
         </div>
-
     {% endfor %}
 
     </main>

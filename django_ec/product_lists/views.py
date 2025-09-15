@@ -124,38 +124,13 @@ def signup_function(request):
     return render(request, "signup.html" )
 
 
-# def loginfunction(request):
-#     if request.method == "POST":
-#         username = request.POST["user_name"]
-#         password = request.POST["passward"]
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return(render(request, "login.html", {"content":"logged in"}))
-#         else:
-#             return render(request, "login.html", {"content": "not logged in"})
-        
-#     return render(request, "login.html", {"content": "not logged in"})
-
-
-# @basic_auth_required
-# def loginfunction(request):
-
-#     users = getattr(settings, 'BASICAUTH_USERS', {})
-#     if request.method == "POST":
-#         username = request.POST["user_name"]
-#         password = request.POST["passward"]
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return(render(request, "login.html", {"content":"logged in"}))
-#         else:
-#             return render(request, "login.html", {"content": "not logged in"})
-        
-#     return render(request, "login.html", {"content": "not logged in"})
-
-
 @basic_auth_required
 def admin_page(request):
     # return render(request, "administrator.html")
     return redirect("administrator")
+
+
+def carts_function(request):
+    id = request.POST["value"]
+    print(id)
+    return render(request, "carts.html" )
