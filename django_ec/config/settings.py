@@ -137,11 +137,6 @@ STATICFILES_DIRS = (
     ]
 )
 
-# MIDDLEWARE = (
-#     'basicauth.middleware.BasicAuthMiddleware',
-    
-# )
-
 
 BASICAUTH_USERS = {
     "yama": "oton",
