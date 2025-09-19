@@ -10,6 +10,7 @@ from basicauth.decorators import basic_auth_required
 # from django.utils.decorators import method_decorator
 
 
+
 # Create your views here.
 def product_list_view(request):
     model = ProductList
