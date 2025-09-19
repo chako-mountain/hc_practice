@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import TemplateView
 from django.conf.urls import include
-from .views import product_list_view, product_detail_view, product_admin_view, showdetailfunction, contents_add_function , delete_function, edit_function, update_function,signup_function,admin_page
+from .views import product_list_view, product_detail_view, product_admin_view, contents_add_function , delete_function, edit_function, update_function,admin_page
 
 urlpatterns = [
     path('lists' , product_list_view, name='lists' ),
@@ -16,8 +16,7 @@ urlpatterns = [
     path('administrator/submit2/', delete_function , name = 'delete' ),
     path('administrator/submit3/', edit_function , name = 'delete' ),
     path('administrator/submit3/submit4/', update_function , name = 'delete' ),
-    path('signup', signup_function , name = "signup" ),
+    # path('signup', signup_function , name = "signup" ),
     # path('login', loginfunction , name = "login"),
     path("admin-basic/", admin_page, name="admin_page"),
-
 ]
