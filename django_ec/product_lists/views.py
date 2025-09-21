@@ -30,7 +30,7 @@ def product_detail_view(request, id):
     return render(request, 'details.html', {"related_products": related_products, "product": product})
     
     
-def product_admin_view(request):
+def admin_product_list_view(request):
     model = ProductList
     object_list = model.objects.all()
     return render(request, 'administrator.html', {'object_list': object_list})
@@ -74,7 +74,7 @@ def delete_function(request):
 
 
 @basic_auth_required
-def edit_function(request):
+def edit_function(request, id):
     # print("edit is called")
     model = ProductList
     edit_id = request.POST["edit_id"]
@@ -104,7 +104,7 @@ def update_function(request):
     update_list.img = request.POST["img"]
     update_list.save()
 
-    return redirect("../../")
+    return redirect('administrator')
     # return render(request, "administrator.html" )
 
 
