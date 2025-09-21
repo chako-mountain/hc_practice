@@ -20,3 +20,20 @@ urlpatterns = [
     # path('login', loginfunction , name = "login"),
     path("admin-basic/", admin_page, name="admin_page"),
 ]
+
+
+# urlpatterns = [
+#     path('lists' , product_list_view, name='lists' ),
+#     path('details' , product_detail_view, name='details' ),
+#     path('administrator/', product_admin_view, name='administrator'),
+#     # path('detail/int< >' , showdetailfunction , name = 'showdetails')
+#     # path('detail/<int:id>/', showdetailfunction, name='detail'),
+#     path('detail/<int:id>/', product_detail_view, name='detail'),
+#     path('administrator/products/create', contents_add_function, name = "contents_add"),
+#     path('administrator/products/delete', delete_function , name = 'delete' ),
+#     path('administrator/products/<int:id>/edit', edit_function , name = 'delete' ),
+#     path('administrator/products/<int:id>/update', update_function , name = 'delete' ),
+#     # path('signup', signup_function , name = "signup" ),
+#     # path('login', loginfunction , name = "login"),
+#     path("admin-basic/", admin_page, name="admin_page"),
+# ]

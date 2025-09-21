@@ -52,52 +52,13 @@ def contents_add_function(request):
             product_list.is_sale = request.POST.get("is_sale") == "on"
             product_list.img = request.POST["img"]
             product_list.save()
-
-            request.session["name"] = product_list.name
-            request.session["price"] = product_list.price
-            request.session["star_rating"] = product_list.star_rating
-            request.session["description"] = product_list.description
-            request.session["is_sale"] = product_list.is_sale
-            request.session["img"] = product_list.img
-
-            temp = request.session
-            print("sessions!!")
-
-            print(temp["name"])
-
             return redirect("/administrator")
         
-
-        
-        except ValidationError:
+        except (ValidationError, ValueError):
             print("this is validation error")
             error_message = "PriceまたはStar Ratingは整数で記入してね"
             return render(request, "administrator.html" ,{ "product_list" : product_list, "error_message":error_message })
         
-
-
-    # temp_update_list = {}
-
-    # temp_update_list["name"] = request.session["name"]
-    request.session["name"] = product_list.name
-    temp = request.session["name"]
-    print("sessions!!")
-    print(temp)
-
-
-
-
-
-        # print("this is name")
-        # print(product_list.name)
-
-        
-
-        # print("called")  # 呼び出されたか確認
-        # print("Method:", request.method)  # POST かどうか
-        # print("POST data:", request.POST)  # 送信データの中身
-
-    # return render(request, "contents.html")
     return redirect("../")
 
 
@@ -141,69 +102,10 @@ def update_function(request):
     update_list.description = request.POST["description"]
     update_list.is_sale = request.POST.get("is_sale") == "on"
     update_list.img = request.POST["img"]
-
-
-
-
-
-    # if (update_list.price.is_integer() == False):
-    #     error_message = "値段には整数を記入してください"
-    #     return render(request, "edit.html" ,{ "update_list" : update_list , "error_messate":error_message})
-
-
-
-    # print("imgですよ")
-    # print(update_list.img)
-
     update_list.save()
 
     return redirect("../../")
     # return render(request, "administrator.html" )
-
-  
-# def signup_function(request):
-
-#     if request.method == "POST":
-#         user_name = request.POST["user_name"]
-#         passward = request.POST["passward"]
-#         try:
-#             user = User.objects.create_user(user_name , '' , passward)
-#         except IntegrityError:
-#             return render(request, "signup.html", {"error":"このユーザーは登録済みです"})
-
-
-#     return render(request, "signup.html" )
-
-
-# def loginfunction(request):
-#     if request.method == "POST":
-#         username = request.POST["user_name"]
-#         password = request.POST["passward"]
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return(render(request, "login.html", {"content":"logged in"}))
-#         else:
-#             return render(request, "login.html", {"content": "not logged in"})
-        
-#     return render(request, "login.html", {"content": "not logged in"})
-
-
-# @basic_auth_required
-# def loginfunction(request):
-
-#     users = getattr(settings, 'BASICAUTH_USERS', {})
-#     if request.method == "POST":
-#         username = request.POST["user_name"]
-#         password = request.POST["passward"]
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return(render(request, "login.html", {"content":"logged in"}))
-#         else:
-#             return render(request, "login.html", {"content": "not logged in"})
-        
-#     return render(request, "login.html", {"content": "not logged in"})
 
 
 @basic_auth_required
