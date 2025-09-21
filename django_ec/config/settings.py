@@ -45,7 +45,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'basicauth.middleware.BasicAuthMiddleware',
 ]
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 ROOT_URLCONF = 'config.urls'
 
@@ -129,14 +132,12 @@ except ImportError:
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     [
         os.path.join(BASE_DIR, "static"), 
     ]
 )
-
 
 BASICAUTH_USERS = {
     "yama": "oton",

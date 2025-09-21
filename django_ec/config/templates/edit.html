@@ -11,7 +11,9 @@
 <body>
     <h1>商品追加</h1>
 
-    <form action="submit_update/" method="POST">
+    {{ error_message }}
+
+    <form action="{% url 'contents_add' %}" method="POST">
         {% csrf_token %}
 
         <input type="hidden" name="product_id" value="{{ edit_list.id }}">
