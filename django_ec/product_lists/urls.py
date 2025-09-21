@@ -25,7 +25,7 @@ from .views import product_list_view, product_detail_view, contents_add_function
 urlpatterns = [
     path('lists' , product_list_view, name='lists' ),
     path('details' , product_detail_view, name='details' ),
-    path('administrator/', admin_product_list_view, name='administrator'),
+    path('administrator/products', admin_product_list_view, name='administrator'),
     # path('detail/int< >' , showdetailfunction , name = 'showdetails')
     # path('detail/<int:id>/', showdetailfunction, name='detail'),
     path('detail/<int:id>/', product_detail_view, name='detail'),

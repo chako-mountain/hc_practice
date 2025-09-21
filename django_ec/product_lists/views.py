@@ -52,14 +52,14 @@ def contents_add_function(request):
             product_list.is_sale = request.POST.get("is_sale") == "on"
             product_list.img = request.POST["img"]
             product_list.save()
-            return redirect("/administrator")
+            return redirect("administrator")
         
         except (ValidationError, ValueError):
             print("this is validation error")
             error_message = "PriceまたはStar Ratingは整数で記入してね"
             return render(request, "administrator.html" ,{ "product_list" : product_list, "error_message":error_message })
         
-    return redirect("../")
+    return redirect('administrator')
 
 
 @basic_auth_required
@@ -70,7 +70,7 @@ def delete_function(request):
     model.objects.filter(id = delete_id).delete()
     print("deleted")
     # return render(request, "test.html")
-    return redirect("../")
+    return redirect('administrator')
 
 
 @basic_auth_required
