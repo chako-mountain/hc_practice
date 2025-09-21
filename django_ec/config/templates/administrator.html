@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +15,6 @@
 
     <form action="submit/" method="POST">
         {% csrf_token %}
-
-        
 
         <label for="name" >Name：</label><br>
         <input type="text" id="name" name="name" required><br><br>
@@ -52,7 +49,6 @@
 <hr>
 
 {% for post in object_list %}
-
 
     <form action = "submit2/" method = "POST"  >{% csrf_token %}
         <input type="hidden" name="post_id" value="{{ post.id }}">

@@ -40,9 +40,11 @@ def product_admin_view(request):
 def contents_add_function(request):
 
     if request.method == "POST":
+    
+        product_list = ProductList()
 
         try: 
-            product_list = ProductList()
+            
             product_list.name = request.POST["name"]
             product_list.price = request.POST["price"]
             product_list.star_rating = request.POST["rating"]
@@ -50,10 +52,41 @@ def contents_add_function(request):
             product_list.is_sale = request.POST.get("is_sale") == "on"
             product_list.img = request.POST["img"]
             product_list.save()
+
+            request.session["name"] = product_list.name
+            request.session["price"] = product_list.price
+            request.session["star_rating"] = product_list.star_rating
+            request.session["description"] = product_list.description
+            request.session["is_sale"] = product_list.is_sale
+            request.session["img"] = product_list.img
+
+            temp = request.session
+            print("sessions!!")
+
+            print(temp["name"])
+
+            return redirect("/administrator")
+        
+
+        
         except ValidationError:
             print("this is validation error")
             error_message = "PriceまたはStar Ratingは整数で記入してね"
             return render(request, "administrator.html" ,{ "product_list" : product_list, "error_message":error_message })
+        
+
+
+    # temp_update_list = {}
+
+    # temp_update_list["name"] = request.session["name"]
+    request.session["name"] = product_list.name
+    temp = request.session["name"]
+    print("sessions!!")
+    print(temp)
+
+
+
+
 
         # print("this is name")
         # print(product_list.name)
@@ -74,7 +107,7 @@ def delete_function(request):
     model = ProductList
     delete_id = request.POST["post_id"]
     model.objects.filter(id = delete_id).delete()
-    # print("deleted")
+    print("deleted")
     # return render(request, "test.html")
     return redirect("../")
 
@@ -96,7 +129,7 @@ def edit_function(request):
 @basic_auth_required
 def update_function(request):
 
-    
+    print("cliced")
 
     product_id = request.POST.get("product_id")
     update_list = ProductList.objects.get(id=product_id)
@@ -108,6 +141,7 @@ def update_function(request):
     update_list.description = request.POST["description"]
     update_list.is_sale = request.POST.get("is_sale") == "on"
     update_list.img = request.POST["img"]
+
 
 
 
