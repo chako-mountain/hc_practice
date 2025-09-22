@@ -53,15 +53,15 @@ def admin_product_list_view(request):
 #     return redirect('administrator')
 
 @basic_auth_required
-def contents_add_function(request):
+def product_create_view(request):
 
     if request.method == "POST":
         product_list = ProductList()
 
         # renderで返却するために、product_listに一旦値を格納しています。
         product_list.name = request.POST.get("name", "").strip()
-        product_list.price = request.POST["price"]
-        product_list.star_rating = request.POST["rating"]
+        # product_list.price = request.POST["price"]
+        # product_list.star_rating = request.POST["rating"]
         product_list.description = request.POST.get("description", "").strip()
         product_list.is_sale = request.POST.get("is_sale") == "on"
         product_list.img = request.POST["img"]
@@ -87,7 +87,7 @@ def contents_add_function(request):
 
 
 @basic_auth_required
-def delete_function(request):
+def product_delete_view(request):
     # print("called")
     delete_id = request.POST["post_id"]
     ProductList.objects.filter(id = delete_id).delete()
@@ -97,7 +97,7 @@ def delete_function(request):
 
 
 @basic_auth_required
-def edit_function(request, id):
+def product_edit_view(request, id):
     # model = ProductList
     # edit_id = request.POST["edit_id"]
     edit_id = id
@@ -107,7 +107,7 @@ def edit_function(request, id):
 
 
 @basic_auth_required
-def update_function(request ,id):
+def product_update_view(request ,id):
 
     # product_id = request.POST.get("product_id")
     product_id = id
@@ -115,8 +115,8 @@ def update_function(request ,id):
 
     update_list = ProductList.objects.get(id=product_id)
     update_list.name = request.POST.get("name", "").strip()
-    update_list.price = request.POST["price"]
-    update_list.star_rating = request.POST["rating"]
+    # update_list.price = request.POST["price"]
+    # update_list.star_rating = request.POST["rating"]
     update_list.description = request.POST.get("description", "").strip()
     update_list.is_sale = request.POST.get("is_sale") == "on"
     update_list.img = request.POST["img"]
