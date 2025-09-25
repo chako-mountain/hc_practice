@@ -35,7 +35,6 @@ def product_create_view(request):
 
     if request.method == "POST":
         product_list = ProductList()
-
         # renderで返却するために、product_listに一旦値を格納しています。
         product_list.name = request.POST.get("name", "").strip()
         product_list.description = request.POST.get("description", "").strip()
@@ -90,7 +89,6 @@ def product_update_view(request ,id):
     try: 
         price = int(price_str) if price_str else None
         star_rating = int(rating_str) if rating_str else None
-        
         # 変換した値を代入
         update_list.price = price
         update_list.star_rating = star_rating
@@ -108,3 +106,10 @@ def product_update_view(request ,id):
 @basic_auth_required
 def admin_page(request):
     return redirect("administrator")
+
+
+def add_products_view(request):
+    print("called")
+    print(request.POST["id"])
+ 
+    return redirect("lists")
