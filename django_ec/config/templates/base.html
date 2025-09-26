@@ -19,7 +19,10 @@
           <li class="breadcrumb-item"><a href="#">About</a></li>
           <li class="breadcrumb-item active" aria-current="page"><a href="#">Shop</a></li>
           <li class="ml-auto">
-            <a href="#">Cart</a>
+            <!-- <form method = "POST">{% csrf_token %}
+              <a href="{% url 'cart' %}" name="id" value="{{ items.id }}">cart</a>
+            </form> -->
+            <a href="{% url 'cart' %}">cart</a>
           </li>
         </ol>
       </nav>

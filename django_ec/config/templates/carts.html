@@ -1,3 +1,14 @@
 これはカードだよ
 お試しコード
 お試しコード2
+
+{% for cart in carts %}
+
+<div>
+    <p>
+        以下にリストを記載
+    </p>
+    {{ cart.product }}
+</div>
+
+{% endfor %}

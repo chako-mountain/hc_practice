@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-from product_lists.models import ProductList, UserList
+from product_lists.models import ProductList, UserList, CartList
 from django.http import HttpResponseRedirect 
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -129,8 +129,82 @@ def admin_page(request):
     return redirect("administrator")
 
 
+# def add_products_view(request):
+
+#     carts = CartList()
+
+
+
+#     session_value_b = request.session.get('key', 'none')
+
+#     CartList.user = UserList.objects.get(session_value = session_value_b).id
+#     CartList.product = request.POST["id"]
+
+#     carts.save()
+
+#     print("saved")
+
+
+
+#     print("called")
+#     print(request.POST["id"])
+#     return redirect("lists")
+
 def add_products_view(request):
-    print("called")
-    print(request.POST["id"])
+    if request.method == "POST":
+        session_value_b = request.session.get('key', 'none')
+
+        # 該当ユーザーを取得
+        user_instance = UserList.objects.get(session_value=session_value_b)
+
+        # 該当商品を取得
+        product_id = request.POST.get("id")  # formから送信されたproductのID
+        product_instance = ProductList.objects.get(id=product_id)
+
+        # カートに追加
+        carts = CartList(user=user_instance, product=product_instance)
+        carts.save()
+
+        print("saved")
+        print("called")
+        print(product_id)
+
     return redirect("lists")
+
+
+# def cart_view(request):
+
+#     session_value_b = request.session.get('key', 'none')
+
+#     # user_id = UserList.objects.get(session_value=session_value_b).id
+
+#     carts = CartList.objects.get(user=session_value_b).product
+#     print(carts)
+    
+
+#     print("called")
+#     return render(request, "carts.html")
+
+
+
+
+def cart_view(request):
+    session_value_b = request.session.get('key', 'none')
+
+    try:
+        # まず対応するUserListインスタンスを取得
+        user_instance = UserList.objects.get(session_value=session_value_b)
+
+        # userインスタンスでCartListをフィルター
+        carts = CartList.objects.filter(user=user_instance)
+
+        print(carts)  # クエリセット全体を表示
+
+        return render(request, "carts.html", {"carts": carts})
+
+    except UserList.DoesNotExist:
+        print("ユーザーが見つかりませんでした")
+        return render(request, "carts.html", {"carts": []})
+
+
 
