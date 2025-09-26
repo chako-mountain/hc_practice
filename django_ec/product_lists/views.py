@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-from product_lists.models import ProductList
+from product_lists.models import ProductList, UserList
 from django.http import HttpResponseRedirect 
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -9,11 +9,31 @@ from django.contrib.auth import authenticate, login
 from django.core.exceptions import ValidationError
 from basicauth.decorators import basic_auth_required
 from django.shortcuts import get_object_or_404
+import uuid
 # from django.utils.decorators import method_decorator
 
 
 def product_list_view(request):
+
+    session_database = UserList()
+
+
+    session_value_b = request.session.get('key', 'none')
+
+    if session_value_b == 'none':
+        print("新規ユーザー")
+        session_value_b = str(uuid.uuid4())
+        request.session['key'] = session_value_b
+        print(session_value_b)
+        session_database.session_value = session_value_b
+        session_database.save()
     
+    if UserList.objects.filter(session_value=session_value_b).exists():
+        print(session_value_b)
+        print("既存のユーザー")
+
+
+
     object_list = ProductList.objects.all()
     return render(request, 'lists.html', {'object_list': object_list})
 
