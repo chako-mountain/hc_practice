@@ -21,5 +21,4 @@ urlpatterns = [
     path("admin-basic/", admin_page, name="admin_page"),
     path("add-products", add_products_view, name = "addproducts"),
     path("go_to_cart", cart_view, name = "cart")
-
 ]
