@@ -172,6 +172,11 @@ def add_products_view(request):
         if request.POST.get("source") == "from_lists":
             print("from_lists")    
             carts.number = 1 
+
+        if request.POST.get("source") == "from_details":
+            print("from_details")    
+            carts.number = 2
+            
             
 
         
