@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404
 
 
 def product_list_view(request):
+    
     object_list = ProductList.objects.all()
     return render(request, 'lists.html', {'object_list': object_list})
 
@@ -111,5 +112,5 @@ def admin_page(request):
 def add_products_view(request):
     print("called")
     print(request.POST["id"])
- 
     return redirect("lists")
+
