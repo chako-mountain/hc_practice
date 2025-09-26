@@ -51,7 +51,7 @@
 
 {% for post in object_list %}
 
-    <form action = "{% url 'delete' %}" method = "POST"  >{% csrf_token %}
+    <form action = "{% url 'delete' %}" method = "POST" >{% csrf_token %}
         <input type="hidden" name="post_id" value="{{ post.id }}">
         <input type="submit" value="削除">
     </form>
