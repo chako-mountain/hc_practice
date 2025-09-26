@@ -42,6 +42,7 @@ class ProductList(models.Model):
 class CartList(models.Model):
     user = models.ForeignKey(UserList, on_delete=models.PROTECT)
     product = models.ForeignKey(ProductList, on_delete=models.PROTECT)
+    number = models.IntegerField(null = False, blank = False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

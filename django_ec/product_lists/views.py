@@ -151,6 +151,11 @@ def admin_page(request):
 #     return redirect("lists")
 
 def add_products_view(request):
+
+    print("add_product_view is")
+
+    
+
     if request.method == "POST":
         session_value_b = request.session.get('key', 'none')
 
@@ -163,6 +168,13 @@ def add_products_view(request):
 
         # カートに追加
         carts = CartList(user=user_instance, product=product_instance)
+
+        if request.POST.get("source") == "from_lists":
+            print("from_lists")    
+            carts.number = 1 
+            
+
+        
         carts.save()
 
         print("saved")

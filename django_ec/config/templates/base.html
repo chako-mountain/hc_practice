@@ -22,7 +22,18 @@
             <!-- <form method = "POST">{% csrf_token %}
               <a href="{% url 'cart' %}" name="id" value="{{ items.id }}">cart</a>
             </form> -->
-            <a href="{% url 'cart' %}">cart</a>
+
+            <form name = "from_lists" value = "from_lists" method = "POST">
+              <a href="{% url 'cart' %}">cart</a>
+            </form>
+<!-- 
+            <form method="POST" action="{% url 'cart' %}">
+              {% csrf_token %}
+              <input type="hidden" name="id" value="from_lists">
+              <button type="submit">Cart</button>
+            </form> -->
+
+            
           </li>
         </ol>
       </nav>
