@@ -150,6 +150,13 @@ def admin_page(request):
 #     print(request.POST["id"])
 #     return redirect("lists")
 
+
+
+
+
+
+
+
 def add_products_view(request):
 
     print("add_product_view is")
@@ -170,23 +177,99 @@ def add_products_view(request):
         carts = CartList(user=user_instance, product=product_instance)
 
         if request.POST.get("source") == "from_lists":
+
+            # new_cart = CartList.objects.get(product=product_id)
+
+            # if CartList.objects.get(product=product_id).number >= 1:
+            #     number = int(CartList.objects.get(product=product_id).number) + 1
+            #     new_cart.number = number
+
+            #     new_cart.save()
+
+            
+
             print("from_lists")    
             carts.number = 1 
 
-        if request.POST.get("source") == "from_details":
-            print("from_details")    
-            carts.number = 2
-            
-            
 
-        
-        carts.save()
+            carts.save()
+
+        if request.POST.get("source") == "from_details":
+
+            if CartList.objects.get(product=product_id).number >= 1:
+
+                new_cart = CartList.objects.get(product=product_id)
+
+                number = int(request.POST.get("number")) + int(CartList.objects.get(product=product_id).number)
+
+                new_cart.number = number
+
+                new_cart.save()
+
+
+                print(number)
+                print("multi")
+
+
+
+            print("from_details")    
+            carts.number = request.POST.get("number")
+            
+            
 
         print("saved")
         print("called")
         print(product_id)
 
     return redirect("lists")
+
+
+
+
+
+
+
+# def add_products_view(request):
+#     print("add_product_view is")
+
+#     if request.method == "POST":
+#         session_value_b = request.session.get('key', 'none')
+#         user_instance = UserList.objects.get(session_value=session_value_b)
+
+#         product_id = request.POST.get("id")
+#         product_instance = ProductList.objects.get(id=product_id)
+
+#         source = request.POST.get("source")
+#         input_number = int(request.POST.get("number", 1))  # from_detailsなら指定、listsならデフォ1
+
+#         try:
+#             # 既に同じユーザー＋商品がカートにあるか確認
+#             existing_cart = CartList.objects.get(user=user_instance, product=product_instance)
+
+#             if source == "from_details":
+#                 existing_cart.number += input_number  # 数量加算
+#                 print("multi")
+#             elif source == "from_lists":
+#                 existing_cart.number += 1  # リストから追加は +1
+
+#             existing_cart.save()
+
+#         except CartList.DoesNotExist:
+#             # 存在しなければ新規作成
+#             if source == "from_details":
+#                 carts = CartList(user=user_instance, product=product_instance, number=input_number)
+#             else:  # from_lists
+#                 carts = CartList(user=user_instance, product=product_instance, number=1)
+
+#             carts.save()
+
+#         print("saved")
+#         print("called")
+#         print(product_id)
+
+#     return redirect("lists")
+
+
 
 
 # def cart_view(request):

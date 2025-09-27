@@ -62,7 +62,8 @@
                 <div class = "price">{{ items.price|floatformat:0 }}円</div>
         
                 <br>
-                <form action ="{% url 'addproducts' %}" method = "POST">{% csrf_token %}   
+                <form action ="{% url 'addproducts' %}" method = "POST">
+                    {% csrf_token %}
                     <input type="hidden" name="source" value="from_lists">
                     <button type="submit" name="id" value="{{ items.id }}" class="btn btn-outline-dark justify-content-center">
                         Add to cart

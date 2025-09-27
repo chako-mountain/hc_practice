@@ -16,10 +16,17 @@
         <p>{{ product.description }}</p>
 
         <form action="{% url 'addproducts' %}" method="POST">{% csrf_token %}
+            
             <input type="hidden" name="source" value="from_details">
+
+            
+            <input type="text" name="number"><br>
+            <!-- <a href="#" class="btn btn-outline-dark justify-content-center">Add to cart</a> -->
+        
             <button type="submit" name="id" value="{{ product.id }}" class="btn btn-outline-dark justify-content-center">
                 Add to cart
             </button>
+            
         </form>
     </div>
     
@@ -70,6 +77,9 @@
                     <div class="price">{{ contents.price|floatformat:0 }}円</div>         
                     <br>
                     <div class="text-center">
+                        <form>
+                            
+                        </form>
                         <a href="#" class="btn btn-outline-dark justify-content-center">Add to cart</a>
                     </div>
                 </div>
