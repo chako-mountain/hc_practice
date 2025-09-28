@@ -174,52 +174,76 @@ def add_products_view(request):
         product_instance = ProductList.objects.get(id=product_id)
 
         # カートに追加
-        carts = CartList(user=user_instance, product=product_instance)
+        # carts = CartList(user=user_instance, product=product_instance)
 
         if request.POST.get("source") == "from_lists":
+            try:
+                # userとproductの両方で一致する既存のカートを探す
+                aim_cart = CartList.objects.get(user=user_instance, product=product_instance)
 
-            # new_cart = CartList.objects.get(product=product_id)
+                aim_cart.number += 1  # numberをインクリメント
+                aim_cart.save()       # 既存レコードを更新
+
+                print("from_lists and 2回目")
+
+            except CartList.DoesNotExist:
+                # まだ存在していない場合は新規作成
+                carts = CartList(user=user_instance, product=product_instance, number=1)
+                carts.save()
+                print("from_lists and 初回追加")
+
+
+
+            
+
+            # print("from_lists")    
+            # carts.number = 1 
+
+
+            # carts.save()
+
+        if request.POST.get("source") == "from_details":
 
             # if CartList.objects.get(product=product_id).number >= 1:
-            #     number = int(CartList.objects.get(product=product_id).number) + 1
+
+            #     new_cart = CartList.objects.get(product=product_id)
+
+            #     number = int(request.POST.get("number")) + int(CartList.objects.get(product=product_id).number)
+
             #     new_cart.number = number
 
             #     new_cart.save()
 
-            
 
-            print("from_lists")    
-            carts.number = 1 
-
-
-            carts.save()
-
-        if request.POST.get("source") == "from_details":
-
-            if CartList.objects.get(product=product_id).number >= 1:
-
-                new_cart = CartList.objects.get(product=product_id)
-
-                number = int(request.POST.get("number")) + int(CartList.objects.get(product=product_id).number)
-
-                new_cart.number = number
-
-                new_cart.save()
-
-
-                print(number)
-                print("multi")
+            #     print(number)
+            #     print("multi")
 
 
 
-            print("from_details")    
-            carts.number = request.POST.get("number")
+            # print("from_details")    
+            # carts.number = request.POST.get("number")
+
+            try:
+                aim_cart = CartList.objects.get(user=user_instance, product=product_instance)
+
+                aim_cart.number += int(request.POST.get("number"))
+
+                print("複数回目の追加")
+
+                aim_cart.save()       
+
+            except CartList.DoesNotExist:
+                # まだ存在していない場合は新規作成
+                carts = CartList(user=user_instance, product=product_instance, number=request.POST.get("number"))
+                carts.save()
+                print("from_lists and 初回追加")
+
             
             
 
-        print("saved")
-        print("called")
-        print(product_id)
+        # print("saved")
+        # print("called")
+        # print(product_id)
 
     return redirect("lists")
 
