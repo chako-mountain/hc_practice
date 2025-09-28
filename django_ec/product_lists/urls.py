@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import TemplateView
 from django.conf.urls import include
-from .views import product_list_view, product_detail_view, product_create_view , product_delete_view, product_edit_view, product_update_view,admin_page,admin_product_list_view,add_products_view, cart_view
+from .views import product_list_view, product_detail_view, product_create_view , product_delete_view, product_edit_view, product_update_view,admin_page,admin_product_list_view,add_products_view, cart_view, cart_delete_view
 
 urlpatterns = [
     path('lists' , product_list_view, name='lists' ),
@@ -20,5 +20,6 @@ urlpatterns = [
     # path('login', loginfunction , name = "login"),
     path("admin-basic/", admin_page, name="admin_page"),
     path("add-products", add_products_view, name = "addproducts"),
-    path("go_to_cart", cart_view, name = "cart")
+    path("go_to_cart", cart_view, name = "cart"),
+    path("cart_delete", cart_delete_view, name = "cart_delete"),
 ]

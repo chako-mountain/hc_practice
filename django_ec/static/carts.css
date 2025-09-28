@@ -2,6 +2,7 @@
     display: flex;
     gap: 40px;
     justify-content: center;
+    margin-bottom: 40px;
 }
 
 .main_contents {
@@ -32,11 +33,16 @@ input.non_name {
 }
 
 .product_contents {
-    width: 350px;
+    width: 200px;
     border: solid 1px;
     border-radius: 5px;
     border-color: rgb(183, 185, 186);
     /* display: inline; */
+}
+
+.total_price {
+    /* margin-top: 20px; */
+    padding-top: 40px;
 }
 
 .product_name_and_price {
@@ -45,5 +51,37 @@ input.non_name {
 
 .product_contents {
     display: flex;
-    gap: 150px;
+    gap: 100px;
+}
+
+.buy_items {
+    display: flex;
+}
+
+/* .delete-button {
+    color: white;
+    width: 24px;
+    height: 24px;
+    background-color: rgb(213, 209, 209);
+    border-radius: 50%;
+    text-align: center;
+
+    line-height: 24px;
+
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+} */
+
+footer {
+    width: 100%;
+    height: 100px;
+    background-color: #bbb8b8;
+    color: rgb(255, 255, 255);
+}
+
+
+footer div {
+    text-align: center;
+    padding: 30px;
 }

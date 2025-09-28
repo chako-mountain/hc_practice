@@ -81,10 +81,50 @@
                 
                 <div class="your_cart">
                     <h4>
-                        Your cart
+                        items
+                        {{ total_number }}個
                     </h4>
+
+                    {% for cart in carts %}
+                    <div class = "buy_items">
+                        
+                        <div class="product_contents">
+                        
+                            <!-- <a href="#" class="delete-button">×</a> -->
+                        
+                            <div class="product_name_and_price">
+                                <div>
+                                    {{ cart.product.name }}
+                                </div>
+                                <div>
+                                    {{ cart.product.price|floatformat:0 }}円
+                                </div>
+                            </div>
+                            <div class="product_number">
+                                {{ cart.number }}個
+                            </div>
+                            
+                        </div>
+
+                        <form action="{% url 'cart_delete' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="delete" value="{{ cart.id }}">
+                            <button type="submit" >×</button>
+                        </form>
+                        
+                    </div>
+                   
+                    {% endfor %}
+
+                    <div>
+                        <h5 class="total_price">
+                            合計金額: {{ total_price|floatformat:0 }}円
+
+                        </h5>
+                        
+                    </div>
             
-                    <div class="product_contents">
+                    <!-- <div class="product_contents">
                         <div class="product_name_and_price">
                             <div>
                                 product name
@@ -135,48 +175,14 @@
                         <div class="product_number">
                             number
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 
                 
-                
-                
-                
+
 
             </div>
 
-           
-
-
-
-
         </body>
-
-        <!-- <div>
-            <p>
-                商品名
-            </p>
-            <p>
-                {{ cart.product }}
-            </p>
-
-            <p>
-                値段
-            </p>
-
-            <p>
-                {{ cart.price }}
-            </p>
-
-            <p>
-                個数
-            </p>
-
-            <p>
-                {{ cart.number }}
-            </p>
-            
-        </div> -->
-
 
 {% endblock %}

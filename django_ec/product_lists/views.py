@@ -389,19 +389,39 @@ def cart_view(request):
 
         # userインスタンスでCartListをフィルター
         carts = CartList.objects.filter(user=user_instance)
-
-
         
 
-        # products = ProductList.objects.filter(id=carts)
+        # products = ProductList.objects.filter(product=user_instance)
+
+        # combined = zip(carts , products)
 
         print(carts)  # クエリセット全体を表示
 
-        return render(request, "carts.html", {"carts": carts},)
+        total_price = 0
+        total_goods = 0
+
+        for cart in carts:
+            price = cart.product.price*cart.number
+
+            total_price += price
+
+            total_goods += cart.number
+
+        return render(request, "carts.html", {"carts": carts, "total_price": total_price, "total_number": total_goods})
 
     except UserList.DoesNotExist:
         print("ユーザーが見つかりませんでした")
         return render(request, "carts.html", {"carts": []})
 
 
+def cart_delete_view(request):
 
+    id = request.POST.get("delete")
+
+    delete_col = CartList.objects.get(id=id)
+
+    delete_col.delete()
+
+    print(id)
+    print("called")
+    return redirect("cart")
