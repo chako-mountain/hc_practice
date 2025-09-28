@@ -15,12 +15,15 @@ import uuid
 
 def product_list_view(request):
 
+
     session_database = UserList()
 
+    session_value_b = request.session.get('key', None)
 
-    session_value_b = request.session.get('key', 'none')
+    print("this is vews")
 
-    if session_value_b == 'none':
+
+    if session_value_b == None:
         print("新規ユーザー")
         session_value_b = str(uuid.uuid4())
         request.session['key'] = session_value_b
@@ -32,10 +35,28 @@ def product_list_view(request):
         print(session_value_b)
         print("既存のユーザー")
 
+    if session_value_b != None and not UserList.objects.filter(session_value=session_value_b).exists():
+        session_database.session_value = session_value_b
+        session_database.save()
+
+
+
+    # try:
+
+    #     user_id = UserList.objects.get(session_value=session_value_b)
+
+    #     goods_sum = CartList.objects.get(user=user_id)
+
+    #     print(goods_sum)
+    #     print("this is goods_sum_objects")
+    
+    # except CartList.DoesNotExist:
+    #     print("not exist")
 
 
     object_list = ProductList.objects.all()
     return render(request, 'lists.html', {'object_list': object_list})
+
 
 
 def product_detail_view(request, id):
