@@ -1,12 +1,15 @@
 <!-- {% load i18n static %} -->
 <!DOCTYPE html>
 <!-- {% get_current_language as LANGUAGE_CODE %} -->
+
+
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- <link href="{% static 'product_details.css' %}" rel="stylesheet"> -->
       {% block link %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
   </head>
@@ -42,5 +45,15 @@
     {% block javascripts %}{% endblock javascripts %}
 
     {% endblock %}
+
+
   </body>
+
+  <footer>
+    <div>ECサイト見本</div>
+  </footer>
+
+
 </html>
+
+
