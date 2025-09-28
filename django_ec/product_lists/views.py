@@ -41,29 +41,46 @@ def product_list_view(request):
 
 
 
-    # try:
+    try:
 
-    #     user_id = UserList.objects.get(session_value=session_value_b)
+        user_id = UserList.objects.get(session_value=session_value_b)
 
-    #     goods_sum = CartList.objects.get(user=user_id)
+        goods_sum = CartList.objects.filter(user=user_id)
 
-    #     print(goods_sum)
-    #     print("this is goods_sum_objects")
+        item_sum = 0
+
+        for item in goods_sum:
+
+            
+
+            print(item.id)
+            print(item.number)
+
+            item_sum += item.number
+
+            print(item_sum)
+
+
+
+        print(goods_sum)
+
+        print("this is goods_sum_objects")
     
-    # except CartList.DoesNotExist:
-    #     print("not exist")
+    except CartList.DoesNotExist:
+        print("not exist")
 
 
     object_list = ProductList.objects.all()
-    return render(request, 'lists.html', {'object_list': object_list})
+    return render(request, 'lists.html', {'object_list': object_list, "item_sum":item_sum})
 
 
 
 def product_detail_view(request, id):
+    # item_sum = item_sum
 
     related_products = ProductList.objects.order_by("-created_at")[:4]
     product = get_object_or_404(ProductList, id=id)
-    return render(request, 'details.html', {"related_products": related_products, "product": product})
+    return render(request, 'details.html', {"related_products": related_products, "product": product, })
     
 
 @basic_auth_required

@@ -51,7 +51,8 @@ MIDDLEWARE = [
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 60*24*30
+SESSION_COOKIE_AGE = SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+
 
 ROOT_URLCONF = 'config.urls'
 

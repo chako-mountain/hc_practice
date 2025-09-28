@@ -27,7 +27,8 @@
             </form> -->
 
             <form name = "from_lists" value = "from_lists" method = "POST">
-              <a href="{% url 'cart' %}">cart</a>
+              <!-- <p>{{ item_sum }}</p> -->
+              <a href="{% url 'cart' %}">{{ item_sum }} items in cart</a>
             </form>
 <!-- 
             <form method="POST" action="{% url 'cart' %}">
