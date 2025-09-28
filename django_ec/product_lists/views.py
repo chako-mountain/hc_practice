@@ -75,12 +75,42 @@ def product_list_view(request):
 
 
 
-def product_detail_view(request, id):
+def product_detail_view(request, id,):
     # item_sum = item_sum
+
+    session_value_b = request.session.get('key', None)
+
+    try:
+
+        user_id = UserList.objects.get(session_value=session_value_b)
+
+        goods_sum = CartList.objects.filter(user=user_id)
+
+        item_sum = 0
+
+        for item in goods_sum:
+
+            
+
+            print(item.id)
+            print(item.number)
+
+            item_sum += item.number
+
+            print(item_sum)
+
+
+
+        print(goods_sum)
+
+        print("this is goods_sum_objects")
+    
+    except CartList.DoesNotExist:
+        print("not exist")
 
     related_products = ProductList.objects.order_by("-created_at")[:4]
     product = get_object_or_404(ProductList, id=id)
-    return render(request, 'details.html', {"related_products": related_products, "product": product, })
+    return render(request, 'details.html', {"related_products": related_products, "product": product, "item_sum":item_sum})
     
 
 @basic_auth_required
@@ -360,9 +390,14 @@ def cart_view(request):
         # userインスタンスでCartListをフィルター
         carts = CartList.objects.filter(user=user_instance)
 
+
+        
+
+        # products = ProductList.objects.filter(id=carts)
+
         print(carts)  # クエリセット全体を表示
 
-        return render(request, "carts.html", {"carts": carts})
+        return render(request, "carts.html", {"carts": carts},)
 
     except UserList.DoesNotExist:
         print("ユーザーが見つかりませんでした")

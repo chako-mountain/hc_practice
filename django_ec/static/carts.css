@@ -1,0 +1,49 @@
+.contents {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.main_contents {
+    margin-left: 40px;
+}
+
+.name {
+    display: flex;
+    gap: 10px;
+}
+
+input.short{
+    width: 120px
+}
+
+input.non_name {
+    width: 500px;
+}
+
+.country_info {
+    display: flex;
+    gap: 20px;
+}
+
+.your_cart {
+    margin-top: 40px;
+    /* border: solid 1px; */
+}
+
+.product_contents {
+    width: 350px;
+    border: solid 1px;
+    border-radius: 5px;
+    border-color: rgb(183, 185, 186);
+    /* display: inline; */
+}
+
+.product_name_and_price {
+    padding-left: 20px;
+}
+
+.product_contents {
+    display: flex;
+    gap: 150px;
+}
