@@ -17,22 +17,36 @@ def product_list_view(request):
     session_database = UserList()
     session_value_b = request.session.get('key', None)
 
+    # セッションにてアクセスしたユーザーを区別する部分
+
     if session_value_b == None:
-        print("新規ユーザー")
+
         session_value_b = str(uuid.uuid4())
         request.session['key'] = session_value_b
-        print(session_value_b)
+
         session_database.session_value = session_value_b
         session_database.save()
     
-    if UserList.objects.filter(session_value=session_value_b).exists():
-        print(session_value_b)
+
+    # if session_value_b != None and not UserList.objects.filter(session_value=session_value_b).exists():
+    #     session_database.session_value = session_value_b
+    #     session_database.save()
+
+    obj, created = UserList.objects.get_or_create(
+        session_value = session_value_b
+    )
+
+    if created:
+        # session_value_b = str(uuid.uuid4())
+        request.session['key'] = session_value_b
+        obj.session_value = session_value_b
+        obj.save()
+    else:
         print("既存のユーザー")
 
-    if session_value_b != None and not UserList.objects.filter(session_value=session_value_b).exists():
-        session_database.session_value = session_value_b
-        session_database.save()
 
+
+    # 商品の合計を求める部分
     try:
         user_id = UserList.objects.get(session_value=session_value_b)
         goods_sum = CartList.objects.filter(user=user_id)
@@ -41,9 +55,7 @@ def product_list_view(request):
         for item in goods_sum:
             item_sum += item.number
 
-        print(goods_sum)
 
-        print("this is goods_sum_objects")
     
     except CartList.DoesNotExist:
         print("not exist")

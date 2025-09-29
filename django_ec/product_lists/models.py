@@ -1,4 +1,5 @@
 from django.db import models
+
     
 class UserList(models.Model):
     session_value = models.CharField(max_length=250, null = False)
