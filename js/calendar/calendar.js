@@ -61,44 +61,6 @@ function create_calendar(begin_day,how_many_day) {
     
 }
 
-// const args = process.argv
-// const thirdArg = args[2];
-
-// if (thirdArg === "-m"){
-
-//     if (args[3] < 1 || args[3] > 12) {
-//         console.log("1〜12の範囲で月を指定してください。");
-//     }
-//     else if(isNaN(args[3])){
-//         console.log("-mの後に1から12の引数を指定してください");
-//     }
-//     else{
-//         const currentYear = new Date().getFullYear();
-
-//         want_to_month = args[3]
-
-//         lastDayOfMonth = new Date(currentYear, want_to_month,0);
-//         firstDayOfMonth = new Date(currentYear,want_to_month-1,1);
-
-//          console.log("     " + args[3]+ "月  2025")
-
-//         create_calendar(firstDayOfMonth.getDay(),lastDayOfMonth.getDate());
-
-//     }
-// }
-// else if (isNaN(args[3])){
-//     const currentYear = today.getFullYear();
-//     const currentMonth = today.getMonth() + 1;
-
-//     console.log("     " + currentMonth + "月  " + currentYear);
-//     create_calendar(firstDayOfMonth.getDay(), lastDayOfMonth.getDate());
-// }
-// else if (args[3] !== "-m"){
-//     console.log("正しい引数 -m を指定してください")
-// }
-
-
-
 const args = process.argv;
 const thirdArg = args[2];
 const fourthArg = args[3];
