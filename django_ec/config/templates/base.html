@@ -1,12 +1,15 @@
 <!-- {% load i18n static %} -->
 <!DOCTYPE html>
 <!-- {% get_current_language as LANGUAGE_CODE %} -->
+
+
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- <link href="{% static 'product_details.css' %}" rel="stylesheet"> -->
       {% block link %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
   </head>
@@ -19,7 +22,22 @@
           <li class="breadcrumb-item"><a href="#">About</a></li>
           <li class="breadcrumb-item active" aria-current="page"><a href="#">Shop</a></li>
           <li class="ml-auto">
-            <a href="#">Cart</a>
+            <!-- <form method = "POST">{% csrf_token %}
+              <a href="{% url 'cart' %}" name="id" value="{{ items.id }}">cart</a>
+            </form> -->
+
+            <form name = "from_lists" value = "from_lists" method = "POST">
+              <!-- <p>{{ item_sum }}</p> -->
+              <a href="{% url 'cart' %}">{{ item_sum }} items in cart</a>
+            </form>
+<!-- 
+            <form method="POST" action="{% url 'cart' %}">
+              {% csrf_token %}
+              <input type="hidden" name="id" value="from_lists">
+              <button type="submit">Cart</button>
+            </form> -->
+
+            
           </li>
         </ol>
       </nav>
@@ -28,5 +46,15 @@
     {% block javascripts %}{% endblock javascripts %}
 
     {% endblock %}
+
+
   </body>
+
+  <footer>
+    <div>ECサイト見本</div>
+  </footer>
+
+
 </html>
+
+

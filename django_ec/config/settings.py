@@ -46,9 +46,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'basicauth.middleware.BasicAuthMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+
 
 ROOT_URLCONF = 'config.urls'
 

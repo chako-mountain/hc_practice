@@ -30,6 +30,7 @@ main {
 
 .Related_products {
     background-color: #e9e8e8;
+    padding-bottom: 50px;
 }
 
 .Related_products h3 {
@@ -55,4 +56,18 @@ main {
     width: 200px;
     max-width: none;
     height: auto;
+}
+
+
+footer {
+    width: 100%;
+    height: 100px;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+}
+
+
+footer div {
+    text-align: center;
+    padding: 30px;
 }

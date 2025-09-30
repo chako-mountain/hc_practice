@@ -28,7 +28,7 @@
         
             </svg>
             <div class="card-body text-center">
-                <h5 class="card-title text-center"><a href="{% url 'detail' items.id %}">{{ items.name }}</a></h5>
+                <h5 class="card-title text-center"><a href="{% url 'detail' items.id  %}">{{ items.name }}</a></h5>
                 <!-- <h1>{{ items.updated_at }}</h1> -->
         
                 <div class="stars">
@@ -62,17 +62,22 @@
                 <div class = "price">{{ items.price|floatformat:0 }}円</div>
         
                 <br>
-                <div class="text-center">
-                    <a href="#" class="btn btn-outline-dark justify-content-center">Add to cart</a>
-                </div>
+                <form action ="{% url 'addproducts' %}" method = "POST">{% csrf_token %}
+                    
+                    <input type="hidden" name="source" value="from_lists">
+                    <button type="submit" name="id" value="{{ items.id }}" class="btn btn-outline-dark justify-content-center">{% csrf_token %}
+                        Add to cart
+                    </button>
+                </form>
+
             </div>
         </div>
 
     {% endfor %}
 
     </main>
-
+<!-- 
     <footer>
     <div>ECサイト見本</div>
-    </fotter>
+    </fotter> -->
 {% endblock %}
