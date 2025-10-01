@@ -48,11 +48,25 @@ function create_todo_lists() {
     // contents = document.getElementById(index);
     // let nameText = document.getElementById("contents");
     // contents.innerText = nameText.value;
+
+
+    
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";  // これでチェックボックスになります
+    checkbox.setAttribute("class","checkbox");
+    checkbox.setAttribute("id",index);
+    lists.appendChild(checkbox);
+
+
+
+
     
     let nametext = document.getElementById("contents");
     const textSpan = document.createElement("span");
     textSpan.innerText = nametext.value;
-    lists.appendChild(textSpan)
+    lists.appendChild(textSpan);
+
+
 
     
 
@@ -84,6 +98,8 @@ function create_todo_lists() {
     
 
 }
+
+
 
 
 // function create_todo_lists() {
