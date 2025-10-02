@@ -14,25 +14,13 @@ import uuid
 
 def product_list_view(request):
 
-    session_database = CartList()
     session_value_b = request.session.get('key', None)
-
-    # セッションにてアクセスしたユーザーを区別する部分
 
     if session_value_b == None:
 
         session_value_b = str(uuid.uuid4())
         request.session['key'] = session_value_b
-
-        # session_database.session_value = session_value_b
-        # session_database.save()
-
         CartList.objects.create(session_key=session_value_b)
-    
-
-    # if session_value_b != None and not CartList.objects.filter(session_value=session_value_b).exists():
-    #     session_database.session_value = session_value_b
-    #     session_database.save()
 
     obj, created = CartList.objects.get_or_create(
         # session_value = session_value_b
@@ -45,23 +33,18 @@ def product_list_view(request):
         obj.session_key = session_value_b
         obj.save()
     else:
-        print("既存のユーザー")
-
-
+        pass
 
     # 商品の合計を求める部分
     try:
         user_id = CartList.objects.get(session_key=session_value_b)
         goods_sum = CartProduct.objects.filter(user=user_id)
         item_sum = 0
-
         for item in goods_sum:
             item_sum += item.number
 
-
-    
     except CartProduct.DoesNotExist:
-        print("not exist")
+        pass
 
     object_list = ProductList.objects.all()
     return render(request, 'lists.html', {'object_list': object_list, "item_sum":item_sum})
@@ -80,7 +63,7 @@ def product_detail_view(request, id,):
             item_sum += item.number
     
     except CartProduct.DoesNotExist:
-        print("not exist")
+        pass
 
     related_products = ProductList.objects.order_by("-created_at")[:4]
     product = get_object_or_404(ProductList, id=id)
@@ -116,7 +99,6 @@ def product_create_view(request):
             return redirect("administrator")    
          
         except (ValidationError, ValueError):
-            print("this is validation error")
             error_message = "PriceまたはStar Ratingは整数で記入してね"
             return render(request, "administrator.html" ,{ "product_list" : product_list, "error_message":error_message })
         
@@ -127,7 +109,6 @@ def product_create_view(request):
 def product_delete_view(request):
     delete_id = request.POST["post_id"]
     ProductList.objects.filter(id = delete_id).delete()
-    print("deleted")
     return redirect('administrator')
 
 
@@ -158,7 +139,6 @@ def product_update_view(request ,id):
         update_list.save()
         return redirect("administrator") 
     except (ValidationError, ValueError):
-        print("this is validation error")
         error_message = "PriceまたはStar Ratingは整数で記入してね"
         # 入力値を一時的に更新しておく
         update_list.price = price_str
@@ -182,13 +162,11 @@ def add_products_view(request):
         product_instance = ProductList.objects.get(id=product_id)
 
         if request.POST.get("source") == "from_lists":
+
             try:
                 aim_cart = CartProduct.objects.get(user=user_instance, product=product_instance)
-
                 aim_cart.number += 1  # numberをインクリメント
                 aim_cart.save()       # 既存レコードを更新
-
-                print("from_lists and 2回目")
 
             except CartProduct.DoesNotExist:
                 # まだ存在していない場合は新規作成
@@ -196,23 +174,16 @@ def add_products_view(request):
                 carts.save()
                 print("from_lists and 初回追加")
 
-
         if request.POST.get("source") == "from_details":
-
             try:
                 aim_cart = CartProduct.objects.get(user=user_instance, product=product_instance)
-
                 aim_cart.number += int(request.POST.get("number"))
-
-                print("複数回目の追加")
-
                 aim_cart.save()       
 
             except CartProduct.DoesNotExist:
                 # まだ存在していない場合は新規作成
                 carts = CartProduct(user=user_instance, product=product_instance, number=request.POST.get("number"))
                 carts.save()
-                print("from_lists and 初回追加")
 
     return redirect("lists")
 
@@ -220,15 +191,11 @@ def add_products_view(request):
 
 def cart_view(request):
     session_value_b = request.session.get('key', 'none')
-
     try:
         # user_instance = CartList.objects.get(session_key=session_value_b)
         # carts = CartProduct.objects.filter(user=user_instance)
 
         carts = CartList.objects.get(session_key=session_value_b).cart_products.all()
-
-        print(carts)  # クエリセット全体を表示
-
         total_price = 0
         total_goods = 0
 
@@ -249,7 +216,4 @@ def cart_delete_view(request):
     id = request.POST.get("delete")
     delete_col = CartProduct.objects.get(id=id)
     delete_col.delete()
-
-    print(id)
-    print("called")
     return redirect("cart")
