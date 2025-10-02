@@ -222,8 +222,10 @@ def cart_view(request):
     session_value_b = request.session.get('key', 'none')
 
     try:
-        user_instance = CartList.objects.get(session_key=session_value_b)
-        carts = CartProduct.objects.filter(user=user_instance)
+        # user_instance = CartList.objects.get(session_key=session_value_b)
+        # carts = CartProduct.objects.filter(user=user_instance)
+
+        carts = CartList.objects.get(session_key=session_value_b).cart_products.all()
 
         print(carts)  # クエリセット全体を表示
 

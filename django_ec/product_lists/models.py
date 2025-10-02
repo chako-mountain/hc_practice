@@ -75,8 +75,17 @@
 # from uuid import UUID
 import uuid
 from django.db import models
+
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
     
-class CartList(models.Model):
+class CartList(BaseModel):
     # session_value = models.CharField(max_length=250, null = False)
     session_key = models.UUIDField(default=uuid.uuid4(),editable=False,unique=True,)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -86,7 +95,7 @@ class CartList(models.Model):
         return str(self.session_key)
 
 
-class ProductList(models.Model):
+class ProductList(BaseModel):
     name = models.CharField(max_length=255, null=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=False)
     star_rating = models.IntegerField(null=True, blank=True)
@@ -100,8 +109,8 @@ class ProductList(models.Model):
         return self.name
     
 
-class CartProduct(models.Model):
-    user = models.ForeignKey(CartList, on_delete=models.PROTECT)
+class CartProduct(BaseModel):
+    user = models.ForeignKey(CartList, on_delete=models.PROTECT, related_name="cart_products")
     product = models.ForeignKey(ProductList, on_delete=models.PROTECT)
     number = models.IntegerField(null = False, blank = False)
     created_at = models.DateTimeField(auto_now_add=True)

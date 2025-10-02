@@ -17,11 +17,8 @@
         </header>
 
         <body>
-
             <div class = "contents">
-
-                <div class="main_contents">
-                
+                <div class="main_contents">   
                     <div class="Billing_address">
                         <h4>
                             Billing address
@@ -35,11 +32,9 @@
                             <div>
                                 <label for="inputPassword5" class="form-label">Last_name</label>
                                 <input type="text" id="inputPassword5" class="form-control short" aria-labelledby="passwordHelpBlock">
-                            </div>
-                
-                
+                            </div>    
                         </div>
-                
+
                         <label for="inputPassword5" class="form-label">Username</label>
                         <input type="text" id="inputPassword5" class="form-control non_name" aria-labelledby="passwordHelpBlock">
                 
@@ -68,12 +63,9 @@
                             <div>
                                 <label for="inputPassword5" class="form-label">Zip</label>
                                 <input type="text" id="inputPassword5" class="form-control short" aria-labelledby="passwordHelpBlock">
-                
-                
+                   
                             </div>
                         </div>
-                
-                
                     </div>
                 </div>
 
@@ -85,10 +77,8 @@
                     </h4>
 
                     {% for cart in carts %}
-                    <div class = "buy_items">
-                        
-                        <div class="product_contents">
-                        
+                    <div class = "buy_items">             
+                        <div class="product_contents">                    
                             <div class="product_name_and_price">
                                 <div>
                                     {{ cart.product.name }}
@@ -99,8 +89,7 @@
                             </div>
                             <div class="product_number">
                                 {{ cart.number }}個
-                            </div>
-                            
+                            </div>  
                         </div>
 
                         <form action="{% url 'cart_delete' %}" method="POST">
@@ -108,7 +97,6 @@
                             <input type="hidden" name="delete" value="{{ cart.id }}">
                             <button type="submit" >×</button>
                         </form>
-                        
                     </div>
                    
                     {% endfor %}
@@ -117,14 +105,9 @@
                         <h5 class="total_price">
                             合計金額: {{ total_price|floatformat:0 }}円
 
-                        </h5>
-                        
-                    </div>
-            
-                </div>
-                
+                        </h5>                  
+                    </div>           
+                </div>               
             </div>
-
         </body>
-
 {% endblock %}
