@@ -15,7 +15,7 @@ urlpatterns = [
     path('administrator/products/<int:id>/edit', product_edit_view , name = 'edit' ),
     path('administrator/products/<int:id>/update', product_update_view , name = 'update' ),
     path("admin-basic/", admin_page, name="admin_page"),
-    path("add-products", add_products_view, name = "addproducts"),
-    path("go_to_cart", cart_view, name = "cart"),
-    path("cart_delete", cart_delete_view, name = "cart_delete"),
+    path("cart/products/add", add_products_view, name = "addproducts"),
+    path("cart", cart_view, name = "cart"),
+    path("cart/products/delete", cart_delete_view, name = "cart_delete"),
 ]
