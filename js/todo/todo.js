@@ -102,6 +102,9 @@ function create_todo_lists() {
 
 
 
+
+
+
 // function create_todo_lists() {
     
 //     index +=1;
@@ -129,3 +132,14 @@ function create_todo_lists() {
     
 //     document.body.appendChild(lists);
 // }
+checkButton = document.getElementsByClassName("checkbox");
+
+checkButton.addEventListener("click",() => {
+    create_todo_lists();
+    all_tasks = document.getElementById("all_tasks");
+
+    all_tasks.innerHTML = index;
+}
+
+)
+
