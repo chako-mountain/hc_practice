@@ -80,15 +80,23 @@ function create_todo_lists() {
     // console.log("チェックボックスがクリックされた");
         console.log(index);
 
-        const parent = event.target.parentElement; // ボタンの親要素を取得
+        result = window.confirm("本当に削除しますか？");
+
+        if(result) {
+
+            const parent = event.target.parentElement; // ボタンの親要素を取得
         // const parentId = parent.id; // 親要素の id を取得
 
-        parent.remove();
+             parent.remove();
 
         // delete_element = document.getElementById(index);
         // delete_element.remove();
 
         // task_count -= 1;
+
+        }
+
+        
 
 
 
@@ -122,8 +130,12 @@ function create_todo_lists() {
 
 
 
+
+
             const form = document.createElement("form");
+            form.style.display = "inline"; 
             form.setAttribute("class", id); 
+    
             
             const input = document.createElement("input");
             input.setAttribute("type", "text");
@@ -131,7 +143,11 @@ function create_todo_lists() {
 
             form.appendChild(input);
 
-            event.target.parentElement.appendChild(form);
+            document.getElementById(id).querySelector("span").replaceWith(form);
+
+            // event.target.parentElement.appendChild(form);
+
+            edit_button.innerText = "更新"
 
             edit_state = "on_edit";
             console.log(edit_state);
@@ -148,11 +164,18 @@ function create_todo_lists() {
 
             // span.replaceWith(form);
 
-            document.getElementById(id).querySelector("form").remove();
+            // document.getElementById(id).querySelector("form").remove();
 
-            document.getElementById(id).querySelector("span").innerHTML = text_contents;
+            // document.getElementById(id).querySelector("span").innerHTML = text_contents;
+
+            new_content = document.createElement("span");
+            new_content.innerHTML = text_contents;
+
+            document.getElementById(id).querySelector("form").replaceWith(new_content);
 
             edit_state = "no_edit";
+
+            edit_button.innerText = "編集"
 
 
 
