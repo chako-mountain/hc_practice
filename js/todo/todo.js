@@ -9,6 +9,8 @@ checked_task = 0;
 task_count = 0;
 
 
+
+
 function create_todo_lists() {
     
     index +=1;
@@ -102,19 +104,143 @@ function create_todo_lists() {
     // edit_button.value = "編集";
     edit_button.innerText = "編集"
     edit_button.setAttribute("id","edit");
+    edit_state = "no_edit"
 
 
-    delete_button.addEventListener("click", (event) => {
+    edit_button.addEventListener("click", (event) => {
 
-        const form = document.createElement("form");
-        form.setAttribute("id", index); // 必要ならIDなどを設定
         
-        const input = document.createElement("input");
-        input.setAttribute("type", "text");
 
-        form.appendChild(input);
+        if(edit_state == "no_edit"){
+
+            id = event.target.parentElement.id;
+
+            text_contents = document.getElementById(id).querySelector("span").innerHTML;
+            console.log(text_contents);
+
+            document.getElementById(id).querySelector("span").innerHTML = ""
+
+
+
+            const form = document.createElement("form");
+            form.setAttribute("class", id); 
+            
+            const input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.value = text_contents;
+
+            form.appendChild(input);
+
+            event.target.parentElement.appendChild(form);
+
+            edit_state = "on_edit";
+            console.log(edit_state);
+
+        }
+
+        else {
+            console.log("else is called");
+            id = event.target.parentElement.id;
+            text_contents = document.getElementById(id).querySelector("form").querySelector("input").value;
+            console.log(text_contents);
+
+            
+
+            // span.replaceWith(form);
+
+            document.getElementById(id).querySelector("form").remove();
+
+            document.getElementById(id).querySelector("span").innerHTML = text_contents;
+
+            edit_state = "no_edit";
+
+
+
+
+        }
 
     });
+
+
+
+
+
+    // edit_button.addEventListener("click", (event) => {
+    //     const parent = event.target.parentElement;
+
+    //     // 既に form があるか確認（＝編集モードかどうか）
+    //     const existingForm = parent.querySelector("form");
+    //     const span = parent.querySelector("span");
+
+    //     if (!existingForm && span) {
+    //         // 編集モードに入る
+
+    //         const text_contents = span.innerText;
+
+    //         // フォームを作って span を置き換える
+    //         const form = document.createElement("form");
+    //         const input = document.createElement("input");
+    //         input.type = "text";
+    //         input.value = text_contents;
+
+    //         form.appendChild(input);
+    //         span.replaceWith(form);  // span を form に置き換える
+
+    //     } else if (existingForm) {
+    //         // 編集完了：form → span に戻す
+    //         const inputValue = existingForm.querySelector("input").value;
+
+    //         const newSpan = document.createElement("span");
+    //         newSpan.innerText = inputValue;
+
+    //         existingForm.replaceWith(newSpan);  // form を span に置き換える
+    //     }
+    // });
+
+
+    // edit_button.addEventListener("click", (event) => {
+    //     const parent = event.target.parentElement;  // 編集ボタンの親div
+        
+    //     const existingForm = parent.querySelector("form.edit-form");
+        
+    //     if (existingForm) {
+    //         // フォームが既にある => 編集完了として値を反映する
+            
+    //         const input = existingForm.querySelector("input[type='text']");
+    //         const newValue = input.value.trim();
+            
+    //         // フォームを削除
+    //         existingForm.remove();
+            
+    //         // spanがあれば更新、なければ新規作成して親に追加
+    //         let textSpan = parent.querySelector("span");
+    //         if (!textSpan) {
+    //             textSpan = document.createElement("span");
+    //             parent.insertBefore(textSpan, event.target); // 編集ボタンの前に追加
+    //         }
+    //         textSpan.innerText = newValue;
+            
+    //     } else {
+    //         // 編集フォームがない => 新規にフォームを表示
+            
+    //         const textSpan = parent.querySelector("span");
+    //         if (!textSpan) return; // テキストがなければ何もしない
+            
+    //         const text_contents = textSpan.innerText;
+            
+    //         // spanをフォームに置き換える
+    //         const form = document.createElement("form");
+    //         form.setAttribute("class", "edit-form");
+            
+    //         const input = document.createElement("input");
+    //         input.setAttribute("type", "text");
+    //         input.value = text_contents;
+            
+    //         form.appendChild(input);
+    //         textSpan.replaceWith(form);
+    //     }
+    // });
+
 
 
     lists.appendChild(edit_button);
@@ -123,6 +249,7 @@ function create_todo_lists() {
 
     const hr = document.createElement("hr");
     lists.appendChild(hr);
+    // parent.insertBefore(form, hr);
 
     document.body.appendChild(lists);
 
