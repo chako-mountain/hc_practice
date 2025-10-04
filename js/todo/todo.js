@@ -87,7 +87,7 @@ function create_todo_lists() {
             const parent = event.target.parentElement; // ボタンの親要素を取得
         // const parentId = parent.id; // 親要素の id を取得
 
-             parent.remove();
+            parent.remove();
 
         // delete_element = document.getElementById(index);
         // delete_element.remove();
